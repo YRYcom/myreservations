@@ -1,0 +1,1 @@
+MyReservations is a simple and efficient tool for managing reservations of various assets such as apartments, vehicles, and other properties.
