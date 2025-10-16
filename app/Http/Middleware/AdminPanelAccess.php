@@ -12,7 +12,7 @@ class AdminPanelAccess
     {
         $user = Auth::user();
 
-        // Si pas connecté ou pas admin → redirection vers login Filament
+        // Si pas connecté ou pas admin ni user - redirection vers login Filament
         if (!$user || (!$user->hasRole('admin') && !$user->hasRole('user'))) {
             Auth::logout();
             $request->session()->invalidate();
