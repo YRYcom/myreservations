@@ -20,7 +20,7 @@ return new class extends Migration
 
         // Créer un utilisateur standard avec Faker
         $user = User::firstOrCreate(
-            ['email' => $faker->unique()->safeEmail()],
+            ['email' => 'user@example.com'],
             [
                 'name' => $faker->name(),
                 'password' => Hash::make('password'), // tu peux faker aussi si tu veux
@@ -30,7 +30,7 @@ return new class extends Migration
 
         // Créer un admin avec Faker
         $admin = User::firstOrCreate(
-            ['email' => $faker->unique()->safeEmail()],
+            ['email' => 'admin@example.com'],
             [
                 'name' => $faker->name(),
                 'password' => Hash::make('password'),
