@@ -6,28 +6,33 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        
+        $faker = Faker::create();
+
+        // Créer les rôles
         $userRole = Role::firstOrCreate(['name' => 'user']);
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
 
+        // Créer un utilisateur standard avec Faker
         $user = User::firstOrCreate(
-            ['email' => 'user@myreservations.tld'],
+            ['email' => $faker->unique()->safeEmail()],
             [
-                'name' => 'User',
-                'password' => Hash::make('password'),
+                'name' => $faker->name(),
+                'password' => Hash::make('password'), // tu peux faker aussi si tu veux
             ]
         );
         $user->assignRole($userRole);
 
+        // Créer un admin avec Faker
         $admin = User::firstOrCreate(
-            ['email' => 'admin@myreservations.tld'],
+            ['email' => $faker->unique()->safeEmail()],
             [
-                'name' => 'Admin',
+                'name' => $faker->name(),
                 'password' => Hash::make('password'),
             ]
         );
@@ -36,18 +41,9 @@ return new class extends Migration
 
     public function down(): void
     {
-        $user = User::where('email', 'user@myreservations.tld')->first();
-        $admin = User::where('email', 'admin@myreservations.tld')->first();
-
-        if ($user) {
-            $user->removeRole('user');
-            $user->delete();
-        }
-
-        if ($admin) {
-            $admin->removeRole('admin');
-            $admin->delete();
-        }
+        User::whereHas('roles', function ($q) {
+            $q->whereIn('name', ['user', 'admin']);
+        })->delete();
 
         Role::whereIn('name', ['user', 'admin'])->delete();
     }
