@@ -15,6 +15,6 @@
     </div>
 
     <span style="margin-left:0.5rem;display:inline-block;" class="font-bold text-lg text-gray-900 dark:text-white leading-tight">
-        MyReserve
+        {{ __('filament.app.name') }}
     </span>
 </div>
