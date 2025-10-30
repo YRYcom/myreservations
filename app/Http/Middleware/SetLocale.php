@@ -10,7 +10,7 @@ class SetLocale
     public function handle($request, Closure $next)
     {
         $locale = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
-        $availableLocales = ['en', 'fr', 'it'];
+        $availableLocales = ['en', 'fr'];
 
         if (in_array($locale, $availableLocales)) {
             App::setLocale($locale);
