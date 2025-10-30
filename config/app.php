@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => 'My Reservations',
+    'name' => env('APP_NAME', 'My Reservations'),
 
     /*
     |--------------------------------------------------------------------------
