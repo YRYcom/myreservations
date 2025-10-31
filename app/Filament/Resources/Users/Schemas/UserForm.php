@@ -43,7 +43,7 @@ class UserForm
                     ]),
                         
                 Select::make('biens')
-                    ->label(__('filament.resources.biens.name'))
+                    ->label(__('filament.resources.users.biens'))
                     ->relationship('biens', 'name')
                     ->multiple()
                     ->searchable()

@@ -25,5 +25,5 @@ return [
     'resources.users.show' => 'Voir l\'utilisateur',
     'resources.users.title' => 'Utilisateurs',
     'resources.users.role' => 'Rôle',
-    'roles_required' => 'Le rôle est requis.',
+    'resources.users.biens' => 'Bien(s) attribué(s)',
 ];

@@ -25,5 +25,6 @@ return [
     'resources.users.show' => 'View user',
     'resources.users.title' => 'Users',
     'resources.users.role' => 'Role',
+    'resources.users.biens' => 'Property(ies) assigned',
     'roles_required' => 'The role is required.',
 ];
