@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBien extends CreateRecord
 {
     protected static string $resource = BienResource::class;
+
+    public function getTitle(): string
+    {
+        return __('filament.resources.biens.create');
+    }
 }

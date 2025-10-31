@@ -1,45 +1,35 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Biens;
 
-use App\Filament\Resources\BienResource\Pages;
-use App\Filament\Resources\BienResource\RelationManagers;
+use App\Filament\Resources\Biens\Pages\CreateBien;
+use App\Filament\Resources\Biens\Pages\EditBien;
+use App\Filament\Resources\Biens\Pages\ListBiens;
+use App\Filament\Resources\Biens\Schemas\BienForm;
+use App\Filament\Resources\Biens\Tables\BiensTable;
 use App\Models\Bien;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
+
 
 class BienResource extends Resource
 {
     protected static ?string $model = Bien::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                //
-            ]);
+        return BienForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
+        return BiensTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -52,9 +42,14 @@ class BienResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBiens::route('/'),
-            'create' => Pages\CreateBien::route('/create'),
-            'edit' => Pages\EditBien::route('/{record}/edit'),
+            'index' => ListBiens::route('/'),
+            'create' => CreateBien::route('/create'),
+            'edit' => EditBien::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()?->hasRole('user');
     }
 }

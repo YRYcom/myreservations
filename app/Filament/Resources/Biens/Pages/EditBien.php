@@ -16,4 +16,9 @@ class EditBien extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    public function getTitle(): string
+    {
+        return __('filament.resources.biens.edit');
+    }
 }

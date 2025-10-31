@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Biens\Schemas;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class BienForm
@@ -10,7 +11,9 @@ class BienForm
     {
         return $schema
             ->components([
-                //
+                TextInput::make('name')
+                    ->label(__('filament.resources.biens.name'))
+                    ->required(),
             ]);
     }
 }
