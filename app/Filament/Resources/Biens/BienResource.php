@@ -50,6 +50,6 @@ class BienResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Auth::user()?->hasRole('user');
+        return Auth::user()?->hasRole('admin');
     }
 }
