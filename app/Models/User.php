@@ -35,5 +35,10 @@ class User extends Authenticatable
     {
         return $this->hasRole('admin', 'user');
     }
+
+    public function biens()
+    {
+        return $this->belongsToMany(Bien::class);
+    }
 }
 
