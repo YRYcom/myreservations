@@ -32,6 +32,8 @@
                                     <p>Ajouté le {{ $bien->created_at->format('d/m/Y') }}</p>
                                 </div>
                             @endif
+                            <div class="bien-card-button-reserve>
+                                <a href="{{ route('filament.resources.reservations.create', ['bien_id' => $bien->id]) }}" class="btn-reserve">Faire une réservation</a>
                         </div>
                         <div class="bien-card-hover-line"></div>
                     </div>

@@ -40,5 +40,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Bien::class);
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
 
