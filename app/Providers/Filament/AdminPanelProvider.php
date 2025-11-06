@@ -40,8 +40,8 @@ class AdminPanelProvider extends PanelProvider
             ->navigationItems([
                 NavigationItem::make('Déconnexion')
                     ->icon('heroicon-o-arrow-left-on-rectangle')
-                    ->url(fn () => route('filament.admin.pages.logout-page'))
-                    ->sort(99),
+                    ->url('#logout')
+                    ->sort(999),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([])
