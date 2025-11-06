@@ -1,9 +1,4 @@
 <x-filament-panels::page>
-    @php
-        $biens = $this->getBiens();
-        $user = Auth::user();
-    @endphp
-
     <div class="biens-container">
         @if($biens->count() > 0)
             <div class="biens-grid">
