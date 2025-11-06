@@ -26,4 +26,5 @@ return [
     'resources.users.title' => 'Utilisateurs',
     'resources.users.role' => 'Rôle',
     'resources.users.biens' => 'Bien(s) attribué(s)',
+    'roles_required' => 'Le rôle est obligatoire.',
 ];
