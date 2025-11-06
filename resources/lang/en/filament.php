@@ -27,4 +27,6 @@ return [
     'resources.users.role' => 'Role',
     'resources.users.biens' => 'Property(ies) assigned',
     'roles_required' => 'The role is required.',
+
+    'dashboard_title' => 'Properties available for reservation',
 ];
