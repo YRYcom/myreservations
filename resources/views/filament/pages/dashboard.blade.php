@@ -5,18 +5,6 @@
     @endphp
 
     <div class="biens-container">
-        @if($user->hasRole('admin'))
-            <div class="biens-header">
-                <h1>Tous les Biens</h1>
-                <p>{{ $biens->count() }} bien{{ $biens->count() > 1 ? 's' : '' }}</p>
-            </div>
-        @else   
-            <div class="biens-header">
-                <h1>Mes Biens</h1>
-                <p>{{ $biens->count() }} bien{{ $biens->count() > 1 ? 's' : '' }} attribué{{ $biens->count() > 1 ? 's' : '' }}</p>
-            </div>
-        @endif
-
         @if($biens->count() > 0)
             <div class="biens-grid">
                 @foreach ($biens as $bien)
@@ -27,11 +15,8 @@
                                     <h3 class="bien-card-title">{{ $bien->name }}</h3>
                                 </div>
                             </div>
-                            @if(isset($bien->created_at))
-                                <div class="bien-card-footer">
-                                    <p>Ajouté le {{ $bien->created_at->format('d/m/Y') }}</p>
-                                </div>
-                            @endif
+                                {{-- <div class="bien-card-footer">
+                                </div> --}}
                         </div>
                         <div class="bien-card-hover-line"></div>
                     </div>
