@@ -10,7 +10,7 @@ use Filament\Pages\Page;
 
 class Dashboard extends Page
 {
-   // protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
     protected static ?string $slug = 'dashboard';
     protected string $view = 'filament.pages.dashboard';
     protected static ?string $title = 'Accueil';
