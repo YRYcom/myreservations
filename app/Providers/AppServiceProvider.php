@@ -25,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
             'panels::head.start',
             fn () => '<link rel="stylesheet" href="' . Vite::asset('resources/css/app.css') . '">'
         );
+
+        FilamentView::registerRenderHook(
+            'panels::body.end',
+            fn () => view('filament.logout-script')
+        );
     }
 }
