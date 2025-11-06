@@ -28,7 +28,7 @@ class Dashboard extends Page
     protected function getViewData(): array
     {
         return [
-            'biens' => auth()->user()->getBiens(),
+            'biens' => auth()->user()->getAccessibleBiens(),
         ];
     }
 
