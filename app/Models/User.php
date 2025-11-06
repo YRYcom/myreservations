@@ -35,5 +35,18 @@ class User extends Authenticatable
     {
         return $this->hasRole('admin', 'user');
     }
+
+    public function biens()
+    {
+        return $this->belongsToMany(Bien::class);
+    }
+
+    public function getAccessibleBiens()
+    {
+        if ($this->hasRole('admin')) {
+            return Bien::all();
+        }
+        return $this->biens;
+    }
 }
 

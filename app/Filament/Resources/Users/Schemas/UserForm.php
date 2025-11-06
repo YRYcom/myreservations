@@ -41,6 +41,13 @@ class UserForm
                     ->validationMessages([
                         'required' => __('filament.roles_required'),
                     ]),
+                        
+                Select::make('biens')
+                    ->label(__('filament.resources.users.biens'))
+                    ->relationship('biens', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
             ]);
     }
 }
