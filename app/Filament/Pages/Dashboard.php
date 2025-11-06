@@ -33,7 +33,8 @@ class Dashboard extends Page
 
     public function getHeading(): string
     {
-        return __('filament.dashboard');
+        return __('filament.dashboard_title');
+
     }
 
     protected static ?string $navigationLabel = null;
