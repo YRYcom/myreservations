@@ -17,6 +17,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -38,11 +41,16 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->navigationItems([
-                NavigationItem::make('Déconnexion')
-                    ->icon('heroicon-o-arrow-left-on-rectangle')
-                    ->url('#logout')
-                    ->sort(999),
+                NavigationItem::make('Logout')
+                    ->url("javascript:document.querySelector('#logout').submit();")
+                    ->icon('heroicon-m-arrow-left-on-rectangle')
+                    ->sort(100),
             ])
+            ->renderHook(PanelsRenderHook::SIDEBAR_NAV_END, function () {
+                return Blade::render('<form action="{{ $logoutLink }}" method="post" id="logout">@csrf</form>', [
+                    'logoutLink' => filament()->getLogoutUrl(),
+                ]);
+            })
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([])
             ->middleware([
