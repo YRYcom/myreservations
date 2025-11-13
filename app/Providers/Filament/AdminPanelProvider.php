@@ -44,7 +44,8 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('Logout')
                     ->url("javascript:document.querySelector('#logout').submit();")
                     ->icon('heroicon-m-arrow-left-on-rectangle')
-                    ->sort(100),
+                    ->sort(100)
+                    ->label(fn () => __('filament.logout')),
             ])
             ->renderHook(PanelsRenderHook::SIDEBAR_NAV_END, function () {
                 return Blade::render('<form action="{{ $logoutLink }}" method="post" id="logout">@csrf</form>', [
