@@ -16,10 +16,11 @@ class ReservationsTable
         return $table
             ->modifyQueryUsing(function ($query) {
                 $query->with(['user', 'bien']);
-                // Les utilisateurs normaux ne voient que leurs propres réservations
+                // Les utilisateurs normaux voient toutes les réservations sur les biens qui leur sont attribués
                 $user = Auth::user();
                 if ($user && !$user->hasRole('admin')) {
-                    $query->where('user_id', $user->id);
+                    $bienIds = $user->getAccessibleBiens()->pluck('id')->toArray();
+                    $query->whereIn('bien_id', $bienIds);
                 }
             })
             ->columns([
@@ -33,11 +34,11 @@ class ReservationsTable
                     ->sortable(),
                 TextColumn::make('date_start')
                     ->label(__('filament.resources.reservations.date_start'))
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('date_end')
                     ->label(__('filament.resources.reservations.date_end'))
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label(__('filament.resources.reservations.created_at'))

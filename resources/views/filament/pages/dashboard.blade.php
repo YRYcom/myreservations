@@ -12,7 +12,7 @@
                             </div>
                             @if($bien->reservations && $bien->reservations->count() > 0)
                                 <div class="bien-card-reservations" style="margin: 1rem 0; padding: 0.75rem; background: #f9fafb; border-radius: 0.5rem;">
-                                    <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #374151;">Réservations</h4>
+                                    <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #374151;">Prochaines réservations</h4>
                                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                                         @foreach($bien->reservations->take(3) as $reservation)
                                             <div style="font-size: 0.75rem; color: #6b7280;">
@@ -21,11 +21,16 @@
                                                 <span>{{ $reservation->date_start->format('d/m/Y') }} - {{ $reservation->date_end->format('d/m/Y') }}</span>
                                             </div>
                                         @endforeach
-                                        @if($bien->reservations->count() > 3)
-                                            <div style="font-size: 0.75rem; color: #6b7280; font-style: italic;">
-                                                + {{ $bien->reservations->count() - 3 }} autre(s) réservation(s)
-                                            </div>
-                                        @endif
+                                        <div style="font-size: 0.75rem; color: #6b7280; font-style: italic">
+                                            <a href="{{ $this->getReservationsListUrl($bien) }}" style="color: #374151; text-decoration: underline;">voir toutes les réservations</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="bien-card-reservations" style="margin: 1rem 0; padding: 0.75rem; background: #f9fafb; border-radius: 0.5rem;">
+                                    <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #374151;">Réservations</h4>
+                                    <div style="font-size: 0.75rem; color: #6b7280;">
+                                        Aucune réservation pour le moment.
                                     </div>
                                 </div>
                             @endif

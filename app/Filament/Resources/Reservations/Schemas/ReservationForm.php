@@ -123,18 +123,23 @@ class ReservationForm
                     ->label(__('filament.resources.reservations.date_start'))
                     ->required()
                     ->native(false)
+                    ->displayFormat('d/m/Y')
+                    ->format('Y-m-d')
                     ->live(),
                 DatePicker::make('date_end')
                     ->label(__('filament.resources.reservations.date_end'))
                     ->required()
                     ->native(false)
+                    ->displayFormat('d/m/Y')
+                    ->format('Y-m-d')
                     ->minDate(fn ($get) => $get('date_start') ?: now())
                     ->rules(['after_or_equal:date_start'])
                     ->validationMessages([
                         'after_or_equal' => 'La date de fin doit être postérieure ou égale à la date de début.',
                     ]),
                 Textarea::make('comment')
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->label(__('filament.resources.reservations.comment')),
             ]);
     }
 }

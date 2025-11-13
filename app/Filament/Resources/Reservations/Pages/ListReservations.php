@@ -10,6 +10,16 @@ class ListReservations extends ListRecords
 {
     protected static string $resource = ReservationResource::class;
 
+    public function mount(): void
+    {
+        parent::mount();
+        
+        // Pré-remplir la recherche si le paramètre tableSearch est présent dans l'URL
+        if (request()->has('tableSearch')) {
+            $this->tableSearch = request()->input('tableSearch');
+        }
+    }
+
     protected function getHeaderActions(): array
     {
         return [
