@@ -3,6 +3,7 @@
 return [
     'dashboard' => 'Accueil',
     'app.name' => 'Mes Réservations',
+    'logout' => 'Se déconnecter',
 
     'resources.biens.name' => 'Nom',
     'resources.biens.created_at' => 'Créé le',
