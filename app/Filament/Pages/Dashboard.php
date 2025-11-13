@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Filament\Pages\Page;
+use App\Filament\Resources\Reservations\ReservationResource;
 
 class Dashboard extends Page
 {
@@ -50,6 +51,21 @@ class Dashboard extends Page
             'biens' => $biens,
             'user' => $user,
         ];
+    }
+
+    public function getReservationUrl(Bien $bien): string
+    {
+        $queryParams = [
+            'bien_id' => $bien->id,
+        ];
+
+        $user = Auth::user();
+
+        if ($user && ! $user->hasRole('admin')) {
+            $queryParams['user_id'] = $user->id;
+        }
+
+        return ReservationResource::getUrl('create') . '?' . http_build_query($queryParams);
     }
 
     protected static ?string $navigationLabel = null;

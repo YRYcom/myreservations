@@ -14,6 +14,14 @@ class Reservation extends Model
         'comment',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'date_start' => 'date',
+            'date_end' => 'date',
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
