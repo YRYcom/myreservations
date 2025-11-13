@@ -63,7 +63,6 @@ class ReservationResource extends Resource
         if ($user?->hasRole('admin')) {
             return true;
         }
-        // Les utilisateurs normaux ne peuvent modifier que leurs propres réservations
         return $user && $record->user_id === $user->id;
     }
     
@@ -73,11 +72,15 @@ class ReservationResource extends Resource
         if ($user?->hasRole('admin')) {
             return true;
         }
-        // Les utilisateurs normaux ne peuvent supprimer que leurs propres réservations
         return $user && $record->user_id === $user->id;
     }
 
     public static function getNavigationLabel(): string
+    {
+        return __('filament.resources.reservations.navigation_label');
+    }
+
+    public static function getLabel(): string
     {
         return __('filament.resources.reservations.navigation_label');
     }

@@ -16,4 +16,9 @@ class EditReservation extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    public function getTitle(): string
+    {
+        return __('filament.resources.reservations.edit');
+    }
 }

@@ -16,4 +16,9 @@ class ListReservations extends ListRecords
             CreateAction::make(),
         ];
     }
+
+    public function getTitle(): string
+    {
+        return __('filament.resources.reservations.list');
+    }
 }

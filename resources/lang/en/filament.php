@@ -38,4 +38,7 @@ return [
     'resources.reservations.created_at' => 'Created at',
     'resources.reservations.updated_at' => 'Updated at',
     'resources.reservations.navigation_label' => 'Reservations',
+    'resources.reservations.list' => 'List of reservations',
+    'resources.reservations.create' => 'Create a reservation',
+    'resources.reservations.edit' => 'Edit a reservation',
 ];
