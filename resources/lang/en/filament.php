@@ -41,4 +41,5 @@ return [
     'resources.reservations.list' => 'List of reservations',
     'resources.reservations.create' => 'Create a reservation',
     'resources.reservations.edit' => 'Edit a reservation',
+    'resources.reservations.comment' => 'Comment',
 ];

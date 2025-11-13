@@ -39,13 +39,8 @@ class Dashboard extends Page
         }
         
         $biens = $user->getAccessibleBiens();
-        if ($user->hasRole('admin')) {
-            $biens->load(['reservations.user', 'reservations.bien']);
-        } else {
-            $biens->load(['reservations' => function ($query) use ($user) {
-                $query->where('user_id', $user->id)->with(['user', 'bien']);
-            }]);
-        }
+        // Charger toutes les réservations pour tous les biens, pour tous les utilisateurs
+        $biens->load(['reservations.user', 'reservations.bien']);
         
         return [
             'biens' => $biens,
@@ -66,6 +61,16 @@ class Dashboard extends Page
         }
 
         return ReservationResource::getUrl('create') . '?' . http_build_query($queryParams);
+    }
+
+    public function getReservationsListUrl(Bien $bien): string
+    {
+        // Utiliser tableSearch pour pré-remplir la recherche avec le nom du bien
+        $queryParams = [
+            'tableSearch' => $bien->name,
+        ];
+
+        return ReservationResource::getUrl('index') . '?' . http_build_query($queryParams);
     }
 
     protected static ?string $navigationLabel = null;
