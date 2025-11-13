@@ -10,12 +10,16 @@ use App\Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationItem;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -36,6 +40,18 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
+            ->navigationItems([
+                NavigationItem::make('Logout')
+                    ->url("javascript:document.querySelector('#logout').submit();")
+                    ->icon('heroicon-m-arrow-left-on-rectangle')
+                    ->sort(100)
+                    ->label(fn () => __('filament.logout')),
+            ])
+            ->renderHook(PanelsRenderHook::SIDEBAR_NAV_END, function () {
+                return Blade::render('<form action="{{ $logoutLink }}" method="post" id="logout">@csrf</form>', [
+                    'logoutLink' => filament()->getLogoutUrl(),
+                ]);
+            })
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([])
             ->middleware([
