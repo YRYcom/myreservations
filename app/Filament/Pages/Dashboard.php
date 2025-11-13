@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use Filament\Pages\Dashboard as BaseDashboard;
 use App\Models\Bien;
 use App\Models\User;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Filament\Pages\Page;
 
@@ -27,8 +28,27 @@ class Dashboard extends Page
 
     protected function getViewData(): array
     {
+        $user = Auth::user();
+        
+        if (!$user) {
+            return [
+                'biens' => collect([]),
+                'user' => null,
+            ];
+        }
+        
+        $biens = $user->getAccessibleBiens();
+        if ($user->hasRole('admin')) {
+            $biens->load(['reservations.user', 'reservations.bien']);
+        } else {
+            $biens->load(['reservations' => function ($query) use ($user) {
+                $query->where('user_id', $user->id)->with(['user', 'bien']);
+            }]);
+        }
+        
         return [
-            'biens' => auth()->user()->getAccessibleBiens(),
+            'biens' => $biens,
+            'user' => $user,
         ];
     }
 

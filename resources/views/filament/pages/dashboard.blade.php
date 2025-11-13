@@ -1,3 +1,7 @@
+@php
+    use App\Filament\Resources\Reservations\ReservationResource;
+@endphp
+
 <x-filament-panels::page>
     <div class="biens-container">
         @if($biens->count() > 0)
@@ -10,13 +14,39 @@
                                     <h3 class="bien-card-title">{{ $bien->name }}</h3>
                                 </div>
                             </div>
+                            
+                            @if($bien->reservations && $bien->reservations->count() > 0)
+                                <div class="bien-card-reservations" style="margin: 1rem 0; padding: 0.75rem; background: #f9fafb; border-radius: 0.5rem;">
+                                    <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #374151;">Réservations</h4>
+                                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                        @foreach($bien->reservations->take(3) as $reservation)
+                                            <div style="font-size: 0.75rem; color: #6b7280;">
+                                                <span style="font-weight: 500;">{{ $reservation->user->name ?? 'N/A' }}</span>
+                                                <span style="margin: 0 0.25rem;">•</span>
+                                                <span>{{ $reservation->date_start->format('d/m/Y') }} - {{ $reservation->date_end->format('d/m/Y') }}</span>
+                                            </div>
+                                        @endforeach
+                                        @if($bien->reservations->count() > 3)
+                                            <div style="font-size: 0.75rem; color: #6b7280; font-style: italic;">
+                                                + {{ $bien->reservations->count() - 3 }} autre(s) réservation(s)
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                            
                             @if(isset($bien->created_at))
                                 <div class="bien-card-footer">
                                     <p>Ajouté le {{ $bien->created_at->format('d/m/Y') }}</p>
                                 </div>
                             @endif
-                            <div class="bien-card-button-reserve">
-                                <a href="{{ route('filament.resources.reservations.create', ['bien_id' => $bien->id]) }}" class="btn-reserve">Faire une réservation</a>
+                            
+                            <div class="bien-card-button-reserve" style="margin-top: 1rem;">
+                                <a href="{{ ReservationResource::getUrl('create') }}?bien_id={{ $bien->id }}" 
+                                   class="btn-reserve"
+                                   style="display: inline-block; padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; text-decoration: none; font-weight: 500; transition: background-color 0.2s;">
+                                    Faire une réservation
+                                </a>
                             </div>
                         </div>
                         <div class="bien-card-hover-line"></div>
