@@ -31,4 +31,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Bien::class);
     }
+
+    public function scopeOrderedByStartDate($query)
+    {
+        return $query->orderBy('date_start', 'asc');
+    }
 }

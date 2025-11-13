@@ -39,8 +39,9 @@ class Dashboard extends Page
         }
         
         $biens = $user->getAccessibleBiens();
-        // Charger toutes les réservations pour tous les biens, pour tous les utilisateurs
-        $biens->load(['reservations.user', 'reservations.bien']);
+        $biens->load(['reservations' => function ($query) {
+            $query->with(['user', 'bien'])->orderedByStartDate();
+        }]);
         
         return [
             'biens' => $biens,
