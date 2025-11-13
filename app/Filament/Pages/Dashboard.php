@@ -13,18 +13,6 @@ class Dashboard extends Page
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
     protected static ?string $slug = 'dashboard';
     protected string $view = 'filament.pages.dashboard';
-    protected static ?string $title = 'Accueil';
-
-    public function getBiens()
-    {
-        $user = Auth::user();
-
-        if ($user->hasRole('admin')) {
-            return Bien::all();
-        }
-
-        return $user->biens;
-    }
 
     public function getTitle(): string
     {
@@ -33,7 +21,15 @@ class Dashboard extends Page
 
     public function getHeading(): string
     {
-        return __('filament.dashboard');
+        return __('filament.dashboard_title');
+
+    }
+
+    protected function getViewData(): array
+    {
+        return [
+            'biens' => auth()->user()->getAccessibleBiens(),
+        ];
     }
 
     protected static ?string $navigationLabel = null;

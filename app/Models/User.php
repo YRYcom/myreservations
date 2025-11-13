@@ -41,9 +41,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Bien::class);
     }
 
-    public function reservations()
+    public function getAccessibleBiens()
     {
-        return $this->hasMany(Reservation::class);
+        if ($this->hasRole('admin')) {
+            return Bien::all();
+        }
+
+        return $this->biens;
     }
 }
 

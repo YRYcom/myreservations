@@ -1,22 +1,5 @@
 <x-filament-panels::page>
-    @php
-        $biens = $this->getBiens();
-        $user = Auth::user();
-    @endphp
-
     <div class="biens-container">
-        @if($user->hasRole('admin'))
-            <div class="biens-header">
-                <h1>Tous les Biens</h1>
-                <p>{{ $biens->count() }} bien{{ $biens->count() > 1 ? 's' : '' }}</p>
-            </div>
-        @else   
-            <div class="biens-header">
-                <h1>Mes Biens</h1>
-                <p>{{ $biens->count() }} bien{{ $biens->count() > 1 ? 's' : '' }} attribué{{ $biens->count() > 1 ? 's' : '' }}</p>
-            </div>
-        @endif
-
         @if($biens->count() > 0)
             <div class="biens-grid">
                 @foreach ($biens as $bien)
@@ -32,8 +15,9 @@
                                     <p>Ajouté le {{ $bien->created_at->format('d/m/Y') }}</p>
                                 </div>
                             @endif
-                            <div class="bien-card-button-reserve>
+                            <div class="bien-card-button-reserve">
                                 <a href="{{ route('filament.resources.reservations.create', ['bien_id' => $bien->id]) }}" class="btn-reserve">Faire une réservation</a>
+                            </div>
                         </div>
                         <div class="bien-card-hover-line"></div>
                     </div>
