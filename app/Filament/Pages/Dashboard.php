@@ -66,7 +66,6 @@ class Dashboard extends Page
 
     public function getReservationsListUrl(Bien $bien): string
     {
-        // Utiliser tableSearch pour pré-remplir la recherche avec le nom du bien
         $queryParams = [
             'tableSearch' => $bien->name,
         ];

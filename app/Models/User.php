@@ -46,7 +46,6 @@ class User extends Authenticatable
         if ($this->hasRole('admin')) {
             return Bien::all();
         }
-
         return $this->biens;
     }
 }

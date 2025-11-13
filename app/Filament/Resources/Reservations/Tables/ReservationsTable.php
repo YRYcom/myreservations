@@ -16,7 +16,6 @@ class ReservationsTable
         return $table
             ->modifyQueryUsing(function ($query) {
                 $query->with(['user', 'bien']);
-                // Les utilisateurs normaux voient toutes les réservations sur les biens qui leur sont attribués
                 $user = Auth::user();
                 if ($user && !$user->hasRole('admin')) {
                     $bienIds = $user->getAccessibleBiens()->pluck('id')->toArray();

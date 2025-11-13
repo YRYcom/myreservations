@@ -14,7 +14,6 @@ class ListReservations extends ListRecords
     {
         parent::mount();
         
-        // Pré-remplir la recherche si le paramètre tableSearch est présent dans l'URL
         if (request()->has('tableSearch')) {
             $this->tableSearch = request()->input('tableSearch');
         }
