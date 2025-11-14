@@ -10,8 +10,44 @@
                                     <h3 class="bien-card-title">{{ $bien->name }}</h3>
                                 </div>
                             </div>
-                                {{-- <div class="bien-card-footer">
-                                </div> --}}
+                            @if($bien->reservations && $bien->reservations->count() > 0)
+                                <div class="bien-card-reservations" style="margin: 1rem 0; padding: 0.75rem; background: #f9fafb; border-radius: 0.5rem;">
+                                    <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #374151;">Réservations</h4>
+                                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                        @foreach($bien->reservations->take(3) as $reservation)
+                                            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: #6b7280; {{ $reservation->isCurrent() ? 'font-weight: bold;' : '' }}">
+                                                <div>
+                                                    <span style="font-weight: {{ $reservation->isCurrent() ? 'bold' : '500' }};">{{ $reservation->user->name ?? 'N/A' }}</span>
+                                                    <span style="margin: 0 0.25rem;">•</span>
+                                                    <span>{{ $reservation->date_start->format('d/m/Y') }} - {{ $reservation->date_end->format('d/m/Y') }}</span>
+                                                </div>
+                                                @if($reservation->isCurrent())
+                                                    <span style="display: inline-block; width: 8px; height: 8px; background-color: #10b981; border-radius: 50%; margin-left: 0.5rem;"></span>
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                        <div style="font-size: 0.75rem; color: #6b7280; font-style: italic">
+                                            <a href="{{ $this->getReservationsListUrl($bien) }}" style="color: #374151; text-decoration: underline;">voir toutes les réservations</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="bien-card-reservations" style="margin: 1rem 0; padding: 0.75rem; background: #f9fafb; border-radius: 0.5rem;">
+                                    <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #374151;">Réservations</h4>
+                                    <div style="font-size: 0.75rem; color: #6b7280;">
+                                        Aucune réservation pour le moment.
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="bien-card-footer">
+                                <div class="bien-card-button-reserve" style="margin-top: 1rem;">
+                                    <a href="{{ $this->getReservationUrl($bien) }}"
+                                       class="btn-reserve"
+                                       style="display: inline-block; padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; text-decoration: none; font-weight: 500; transition: background-color 0.2s;">
+                                        Faire une réservation
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="bien-card-hover-line"></div>
                     </div>

@@ -22,4 +22,9 @@ class Bien extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

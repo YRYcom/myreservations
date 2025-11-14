@@ -30,4 +30,16 @@ return [
     'roles_required' => 'Le rôle est obligatoire.',
 
     'dashboard_title' => 'Biens disponibles à la réservation',
+
+    'resources.reservations.user.name' => 'Utilisateur',
+    'resources.reservations.bien.name' => 'Bien',
+    'resources.reservations.date_start' => 'Date de début',
+    'resources.reservations.date_end' => 'Date de fin',
+    'resources.reservations.created_at' => 'Créé le',
+    'resources.reservations.updated_at' => 'Mis à jour le',
+    'resources.reservations.navigation_label' => 'Réservations',
+    'resources.reservations.list' => 'Liste des réservations',
+    'resources.reservations.create' => 'Créer une réservation',
+    'resources.reservations.edit' => 'Modifier une réservation',
+    'resources.reservations.comment' => 'Commentaire',
 ];
