@@ -20,7 +20,7 @@
                                             @endphp
                                             <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: #6b7280; {{ $isCurrent ? 'font-weight: bold;' : '' }}">
                                                 <div>
-                                                    <span style="font-weight: 500;">{{ $reservation->user->name ?? 'N/A' }}</span>
+                                                    <span style="font-weight: {{ $isCurrent ? 'bold' : '500' }};">{{ $reservation->user->name ?? 'N/A' }}</span>
                                                     <span style="margin: 0 0.25rem;">•</span>
                                                     <span>{{ $reservation->date_start->format('d/m/Y') }} - {{ $reservation->date_end->format('d/m/Y') }}</span>
                                                 </div>
