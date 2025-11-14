@@ -9,6 +9,7 @@ class Reservation extends Model
     protected $fillable = [
         'user_id',
         'bien_id',
+        'occupant_id',
         'date_start',
         'date_end',
         'comment',
@@ -30,6 +31,11 @@ class Reservation extends Model
     public function bien()
     {
         return $this->belongsTo(Bien::class);
+    }
+
+    public function occupant()
+    {
+        return $this->belongsTo(Occupant::class);
     }
 
     public function scopeOrderedByStartDate($query)
