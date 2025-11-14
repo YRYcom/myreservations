@@ -39,4 +39,9 @@ class Reservation extends Model
             ->orderBy('date_start', 'asc')
             ->orderBy('date_end', 'asc');
     }
+
+    public function isCurrent()
+    {
+        return now()->between($this->date_start, $this->date_end);
+    }
 }

@@ -15,16 +15,13 @@
                                     <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #374151;">Réservations</h4>
                                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                                         @foreach($bien->reservations->take(3) as $reservation)
-                                            @php
-                                                $isCurrent = now()->between($reservation->date_start, $reservation->date_end);
-                                            @endphp
-                                            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: #6b7280; {{ $isCurrent ? 'font-weight: bold;' : '' }}">
+                                            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: #6b7280; {{ $reservation->isCurrent() ? 'font-weight: bold;' : '' }}">
                                                 <div>
-                                                    <span style="font-weight: {{ $isCurrent ? 'bold' : '500' }};">{{ $reservation->user->name ?? 'N/A' }}</span>
+                                                    <span style="font-weight: {{ $reservation->isCurrent() ? 'bold' : '500' }};">{{ $reservation->user->name ?? 'N/A' }}</span>
                                                     <span style="margin: 0 0.25rem;">•</span>
                                                     <span>{{ $reservation->date_start->format('d/m/Y') }} - {{ $reservation->date_end->format('d/m/Y') }}</span>
                                                 </div>
-                                                @if($isCurrent)
+                                                @if($reservation->isCurrent())
                                                     <span style="display: inline-block; width: 8px; height: 8px; background-color: #10b981; border-radius: 50%; margin-left: 0.5rem;"></span>
                                                 @endif
                                             </div>
