@@ -34,6 +34,9 @@ class Reservation extends Model
 
     public function scopeOrderedByStartDate($query)
     {
-        return $query->orderBy('date_start', 'asc');
+        return $query
+            ->where('date_end', '>=', now()->toDateString())
+            ->orderBy('date_start', 'asc')
+            ->orderBy('date_end', 'asc');
     }
 }
