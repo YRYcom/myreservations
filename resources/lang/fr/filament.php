@@ -32,6 +32,7 @@ return [
     'dashboard_title' => 'Biens disponibles à la réservation',
 
     'resources.reservations.user.name' => 'Utilisateur',
+    'resources.reservations.occupant.name' => 'Occupant',
     'resources.reservations.bien.name' => 'Bien',
     'resources.reservations.date_start' => 'Date de début',
     'resources.reservations.date_end' => 'Date de fin',

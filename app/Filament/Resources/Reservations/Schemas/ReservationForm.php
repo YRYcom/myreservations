@@ -9,6 +9,7 @@ use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bien;
 use App\Models\User;
+use App\Models\Occupant;
 
 class ReservationForm
 {
@@ -17,66 +18,25 @@ class ReservationForm
         return $schema
             ->components([
                 Select::make('user_id')
-                    ->label(__('filament.resources.reservations.user.name'))
+                    ->hidden()
                     ->required()
-                    ->relationship('user', 'name')
-                    ->searchable()
-                    ->preload()
                     ->default(function () {
                         $requestedUserId = request()->input('user_id');
-                        if ($requestedUserId) {
-                            return $requestedUserId;
-                        }
-
-                        $currentUser = Auth::user();
-
-                        return $currentUser && ! $currentUser->hasRole('admin')
-                            ? $currentUser->id
-                            : null;
+                        return $requestedUserId ?: Auth::id();
                     })
-                    ->disabled(fn () => !Auth::user()?->hasRole('admin'))
-                    ->dehydrated()
-                    ->live()
                     ->afterStateHydrated(function (Select $component, $state) {
-                        if (filled($state)) {
-                            return;
-                        }
-
-                        $requestedUserId = request()->input('user_id');
-                        if ($requestedUserId) {
-                            $component->state($requestedUserId);
-                            return;
-                        }
-
-                        $currentUser = Auth::user();
-                        if ($currentUser && ! $currentUser->hasRole('admin')) {
-                            $component->state($currentUser->id);
+                        if (empty($state)) {
+                            $requestedUserId = request()->input('user_id');
+                            $component->state($requestedUserId ?: Auth::id());
                         }
                     })
-                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
-                        if (! Auth::user()?->hasRole('admin')) {
-                            return;
-                        }
-
-                        $selectedBienId = $get('bien_id');
-
-                        if (! $selectedBienId) {
-                            return;
-                        }
-
-                        $selectedUser = $state ? User::find($state) : null;
-
-                        if (! $selectedUser) {
-                            $set('bien_id', null);
-                            return;
-                        }
-
-                        $allowedBienIds = $selectedUser->getAccessibleBiens()->pluck('id')->toArray();
-
-                        if (! in_array($selectedBienId, $allowedBienIds, true)) {
-                            $set('bien_id', null);
-                        }
-                    }),
+                    ->dehydrated(),
+                Select::make('occupant_id')
+                    ->label(__('filament.resources.reservations.occupant.name'))
+                    ->required()
+                    ->relationship('occupant', 'name')
+                    ->searchable()
+                    ->preload(),
                 Select::make('bien_id')
                     ->label(__('filament.resources.reservations.bien.name'))
                     ->required()
