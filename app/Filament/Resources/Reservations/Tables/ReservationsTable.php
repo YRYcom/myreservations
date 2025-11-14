@@ -54,7 +54,8 @@ class ReservationsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->visible(fn ($record) => \App\Filament\Resources\Reservations\ReservationResource::canEdit($record)),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
