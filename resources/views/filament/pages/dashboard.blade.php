@@ -17,7 +17,7 @@
                                         @foreach($bien->reservations->take(3) as $reservation)
                                             <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: #6b7280; {{ $reservation->isCurrent() ? 'font-weight: bold;' : '' }}">
                                                 <div>
-                                                    <span style="font-weight: {{ $reservation->isCurrent() ? 'bold' : '500' }};">{{ $reservation->user->name ?? 'N/A' }}</span>
+                                                    <span style="font-weight: {{ $reservation->isCurrent() ? 'bold' : '500' }};">{{ $reservation->occupant->name ?? 'N/A' }}</span>
                                                     <span style="margin: 0 0.25rem;">•</span>
                                                     <span>{{ $reservation->date_start->format('d/m/Y') }} - {{ $reservation->date_end->format('d/m/Y') }}</span>
                                                 </div>
