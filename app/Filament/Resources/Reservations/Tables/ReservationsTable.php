@@ -15,7 +15,7 @@ class ReservationsTable
     {
         return $table
             ->modifyQueryUsing(function ($query) {
-                $query->with(['user', 'bien']);
+                $query->with(['user', 'bien', 'occupant']);
                 $user = Auth::user();
                 if ($user && !$user->hasRole('admin')) {
                     $bienIds = $user->getAccessibleBiens()->pluck('id')->toArray();
@@ -23,8 +23,8 @@ class ReservationsTable
                 }
             })
             ->columns([
-                TextColumn::make('user.name')
-                    ->label(__('filament.resources.reservations.user.name'))
+                TextColumn::make('occupant.name')
+                    ->label(__('filament.resources.reservations.occupant'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('bien.name')
