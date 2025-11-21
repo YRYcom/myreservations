@@ -45,4 +45,5 @@ return [
     'resources.reservations.comment' => 'Commentaire',
     'resources.reservations.occupant' => 'Occupant',
     'resources.reservations.occupant.name.unique' => 'Le nom de l\'occupant doit être unique.',
+    'resources.reservations.filters.hide_finished' => 'Masquer les réservations terminées',
 ];
