@@ -48,6 +48,6 @@ class Reservation extends Model
 
     public function isCurrent()
     {
-        return now()->between($this->date_start, $this->date_end);
+        return now()->between($this->date_start, $this->date_end->addDay());
     }
 }
