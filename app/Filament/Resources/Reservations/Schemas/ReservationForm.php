@@ -6,6 +6,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bien;
 use App\Models\User;
@@ -36,7 +37,21 @@ class ReservationForm
                     ->required()
                     ->relationship('occupant', 'name')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->label(__('filament.resources.reservations.occupant.name'))
+                            ->required()
+                            ->unique('occupants', 'name')
+                            ->validationMessages([
+                                'unique' => __('filament.resources.reservations.occupant.name.unique')
+                            ]),
+                    ])
+                    ->createOptionUsing(function (array $data) {
+                        return Occupant::create([
+                            'name' => $data['name'],
+                        ])->getKey();
+                    }),
                 Select::make('bien_id')
                     ->label(__('filament.resources.reservations.bien.name'))
                     ->required()
