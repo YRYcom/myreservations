@@ -6,6 +6,8 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,8 +53,20 @@ class ReservationsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Filter::make('hide_finished')
+                    ->label(__('filament.resources.reservations.filters.hide_finished'))
+                    ->default(true)
+                    ->query(function ($query) {
+                        $today = now()->startOfDay();
+                        $query->where(function ($query) use ($today) {
+                            $query->whereNull('date_end')
+                                ->orWhereDate('date_end', '>=', $today);
+                        });
+                    })
+                    ->toggle(),
             ])
+            ->filtersLayout(FiltersLayout::AboveContent)
+            ->filtersFormColumns(1)
             ->recordActions([
                 EditAction::make()
                     ->visible(fn ($record) => \App\Filament\Resources\Reservations\ReservationResource::canEdit($record)),
