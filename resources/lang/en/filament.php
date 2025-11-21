@@ -44,4 +44,5 @@ return [
     'resources.reservations.edit' => 'Edit a reservation',
     'resources.reservations.comment' => 'Comment',
     'resources.reservations.occupant' => 'Occupant',
+    'resources.reservations.occupant.name.unique' => 'The occupant name must be unique.',
 ];
