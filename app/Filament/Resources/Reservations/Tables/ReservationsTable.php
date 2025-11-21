@@ -6,7 +6,6 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
@@ -65,8 +64,6 @@ class ReservationsTable
                     })
                     ->toggle(),
             ])
-            ->filtersLayout(FiltersLayout::AboveContent)
-            ->filtersFormColumns(1)
             ->recordActions([
                 EditAction::make()
                     ->visible(fn ($record) => \App\Filament\Resources\Reservations\ReservationResource::canEdit($record)),
