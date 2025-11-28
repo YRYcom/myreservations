@@ -42,7 +42,7 @@
         x-model="checked"
         @change="toggle"
     >
-    <label for="display-finished-toggle" class="text-sm font-medium text-gray-700 dark:text-gray-200">
+    <label for="display-finished-toggle" class="text-sm font-medium text-gray-700 dark:text-white">
         {{ __('filament.resources.reservations.filters.show_finished') }}
     </label>
 </div>
