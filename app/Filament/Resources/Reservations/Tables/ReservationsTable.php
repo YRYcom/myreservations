@@ -6,8 +6,8 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class ReservationsTable
@@ -15,12 +15,19 @@ class ReservationsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(function ($query) {
+            ->modifyQueryUsing(function (Builder $query) {
                 $query->with(['user', 'bien', 'occupant']);
                 $user = Auth::user();
                 if ($user && !$user->hasRole('admin')) {
                     $bienIds = $user->getAccessibleBiens()->pluck('id')->toArray();
                     $query->whereIn('bien_id', $bienIds);
+                }
+                if (! session('display_finished', false)) {
+                    $today = now()->startOfDay();
+                    $query->where(function (Builder $query) use ($today) {
+                        $query->whereNull('date_end')
+                            ->orWhereDate('date_end', '>=', $today);
+                    });
                 }
             })
             ->columns([
@@ -51,19 +58,7 @@ class ReservationsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                Filter::make('hide_finished')
-                    ->label(__('filament.resources.reservations.filters.hide_finished'))
-                    ->default(true)
-                    ->query(function ($query) {
-                        $today = now()->startOfDay();
-                        $query->where(function ($query) use ($today) {
-                            $query->whereNull('date_end')
-                                ->orWhereDate('date_end', '>=', $today);
-                        });
-                    })
-                    ->toggle(),
-            ])
+            ->filters([])
             ->recordActions([
                 EditAction::make()
                     ->visible(fn ($record) => \App\Filament\Resources\Reservations\ReservationResource::canEdit($record)),
