@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Reservations\Pages;
 
 use App\Filament\Resources\Reservations\ReservationResource;
-use App\Filament\Resources\Reservations\Widgets\DisplayFinishedToggle;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -24,13 +23,6 @@ class ListReservations extends ListRecords
     {
         return [
             CreateAction::make(),
-        ];
-    }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            DisplayFinishedToggle::class,
         ];
     }
 

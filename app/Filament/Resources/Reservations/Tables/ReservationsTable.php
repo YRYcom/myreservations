@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Reservations\Tables;
 
+use App\Filament\Resources\Reservations\Widgets\DisplayFinishedToggle;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -9,12 +10,18 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Filament\Actions\Action;
+use Illuminate\Support\HtmlString; 
 
 class ReservationsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->header(function () {
+                $widget = new DisplayFinishedToggle();
+                return view('filament.resources.reservations.widgets.display-finished-toggle', $widget->getViewData());
+            })
             ->modifyQueryUsing(function (Builder $query) {
                 $query->with(['user', 'bien', 'occupant']);
                 $user = Auth::user();

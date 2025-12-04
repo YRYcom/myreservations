@@ -1,5 +1,6 @@
 <div
-    class="flex items-center gap-2"
+    id="display-finished-toggle-container"
+    class="toggle-container-div"
     x-data="{
         checked: {{ $checked ? 'true' : 'false' }},
         toggle() {
@@ -42,8 +43,9 @@
         x-model="checked"
         @change="toggle"
     >
-    <label for="display-finished-toggle" class="text-sm font-medium text-gray-700 dark:text-white">
+    <label for="display-finished-toggle" class="text-sm font-medium text-gray-700 dark:text-white whitespace-nowrap">
         {{ __('filament.resources.reservations.filters.show_finished') }}
     </label>
 </div>
 
+<script src="{{ asset('js/filament/reservations/display-finished-toggle.js') }}"></script>
