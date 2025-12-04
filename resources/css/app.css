@@ -258,19 +258,3 @@ html.dark .empty-state p,
 .search-container-div .fi-ta-search-field {
     max-width: 400px;
 }
-
-@media (max-width: 767px) {
-    .fi-ta-header-toolbar {
-        flex-direction: column;
-    }
-    
-    .toggle-container-div,
-    .search-container-div {
-        width: 100%;
-        padding: 0.5rem 0;
-    }
-    
-    .search-container-div .fi-ta-search-field {
-        max-width: 100%;
-    }
-}
