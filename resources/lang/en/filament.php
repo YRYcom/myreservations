@@ -45,4 +45,8 @@ return [
     'resources.reservations.comment' => 'Comment',
     'resources.reservations.occupant' => 'Occupant',
     'resources.reservations.occupant.name.unique' => 'The occupant name must be unique.',
+    'resources.reservations.filters.show_finished' => 'Show finished reservations',
+    'resources.reservations.filters.hide_finished' => 'Hide finished reservations',
+    'resources.reservations.filters.error' => 'Error',
+    'resources.reservations.filters.update_error' => 'An error occurred while updating the filter.',
 ];

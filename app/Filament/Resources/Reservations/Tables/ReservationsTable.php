@@ -2,24 +2,39 @@
 
 namespace App\Filament\Resources\Reservations\Tables;
 
+use App\Filament\Resources\Reservations\Widgets\DisplayFinishedToggle;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Filament\Actions\Action;
+use Illuminate\Support\HtmlString; 
 
 class ReservationsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(function ($query) {
+            ->header(function () {
+                $widget = new DisplayFinishedToggle();
+                return view('filament.resources.reservations.widgets.display-finished-toggle', $widget->getViewData());
+            })
+            ->modifyQueryUsing(function (Builder $query) {
                 $query->with(['user', 'bien', 'occupant']);
                 $user = Auth::user();
                 if ($user && !$user->hasRole('admin')) {
                     $bienIds = $user->getAccessibleBiens()->pluck('id')->toArray();
                     $query->whereIn('bien_id', $bienIds);
+                }
+                if (! session('display_finished', false)) {
+                    $today = now()->startOfDay();
+                    $query->where(function (Builder $query) use ($today) {
+                        $query->whereNull('date_end')
+                            ->orWhereDate('date_end', '>=', $today);
+                    });
                 }
             })
             ->columns([
@@ -49,9 +64,6 @@ class ReservationsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
             ])
             ->recordActions([
                 EditAction::make()

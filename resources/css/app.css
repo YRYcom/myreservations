@@ -229,3 +229,32 @@ html.dark .empty-state p,
 :root[data-theme='dark'] .empty-state p {
     color: rgb(156, 163, 175);
 }
+
+.fi-ta-header-toolbar {
+    padding-left: 0 !important;
+}
+
+.toggle-container-div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 0;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.fi-ta-header:not(.fi-ta-header-toolbar) #display-finished-toggle-container,
+.fi-ta-header-content #display-finished-toggle-container {
+    display: none !important;
+}
+
+.search-container-div {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 0.5rem 1rem;
+}
+
+.search-container-div .fi-ta-search-field {
+    max-width: 400px;
+}
