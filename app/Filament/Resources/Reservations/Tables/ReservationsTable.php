@@ -24,7 +24,7 @@ class ReservationsTable
             })
             ->modifyQueryUsing(function (Builder $query) {
                 $query->with(['user', 'bien', 'occupant']);
-                $query->orderedByStartDate();
+                $query->orderedByStartDateWithoutRestrictions();
                 $user = Auth::user();
                 if ($user && !$user->hasRole('admin')) {
                     $bienIds = $user->getAccessibleBiens()->pluck('id')->toArray();
