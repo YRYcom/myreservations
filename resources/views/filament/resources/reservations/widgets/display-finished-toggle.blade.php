@@ -20,9 +20,9 @@
                 .then((response) => {
                     if (!response.ok) {
                         new FilamentNotification()
-                            .title('{{ __('Error') }}')
+                            .title('{{ __('filament.resources.reservations.filters.error') }}')
                             .danger()
-                            .body('{{ __('An error occurred while updating the filter.') }}')
+                            .body('{{ __('filament.resources.reservations.filters.update_error') }}')
                             .send();
                         return null;
                     }
@@ -40,9 +40,9 @@
                 })
                 .catch((error) => {
                     new FilamentNotification()
-                        .title('{{ __('Error') }}')
+                        .title('{{ __('filament.resources.reservations.filters.error') }}')
                         .danger()
-                        .body('{{ __('An error occurred while updating the filter.') }}')
+                        .body('{{ __('filament.resources.reservations.filters.update_error') }}')
                         .send();
                 });
         },
