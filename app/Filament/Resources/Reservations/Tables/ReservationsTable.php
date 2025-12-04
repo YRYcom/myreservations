@@ -66,7 +66,6 @@ class ReservationsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([])
             ->recordActions([
                 EditAction::make()
                     ->visible(fn ($record) => \App\Filament\Resources\Reservations\ReservationResource::canEdit($record)),
