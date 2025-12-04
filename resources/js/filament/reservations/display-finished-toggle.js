@@ -32,7 +32,7 @@ window.displayFinishedToggle = function (initialChecked) {
                 })
                 .then((data) => {
                     if (data) {
-                        window.location.reload();
+                        Livewire.dispatch('refresh');
                     }
                 })
                 .catch((error) => {
