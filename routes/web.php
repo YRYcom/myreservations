@@ -12,6 +12,5 @@ Route::middleware('auth')->post('/reservations/display-finished', function (Requ
 
     return response()->json([
         'success' => true,
-        'redirect_to' => $request->input('redirect_to', url()->previous()),
     ]);
 })->name('reservations.display-finished');

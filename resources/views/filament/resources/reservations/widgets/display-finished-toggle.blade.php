@@ -18,13 +18,19 @@
                 credentials: 'same-origin',
             })
                 .then((response) => {
-                    if (! response.ok) {
-                        throw new Error('Request failed');
+                    if (!response.ok) {
+                        new FilamentNotification()
+                            .title('{{ __('Error') }}')
+                            .danger()
+                            .body('{{ __('An error occurred while updating the filter.') }}')
+                            .send();
+                        return null;
                     }
-
                     return response.json();
                 })
                 .then((data) => {
+                    if (!data) return;
+                    
                     if (data.redirect_to) {
                         window.location = data.redirect_to;
                         return;
@@ -32,7 +38,13 @@
 
                     window.location.reload();
                 })
-                .catch(() => window.location.reload());
+                .catch((error) => {
+                    new FilamentNotification()
+                        .title('{{ __('Error') }}')
+                        .danger()
+                        .body('{{ __('An error occurred while updating the filter.') }}')
+                        .send();
+                });
         },
     }"
 >
@@ -48,4 +60,4 @@
     </label>
 </div>
 
-<script src="{{ asset('js/filament/reservations/display-finished-toggle.js') }}"></script>
+@vite('resources/js/filament/reservations/display-finished-toggle.js')
