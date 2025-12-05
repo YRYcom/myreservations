@@ -46,6 +46,13 @@ class Reservation extends Model
             ->orderBy('date_end', 'asc');
     }
 
+    public function scopeOrderedByStartDateWithoutRestrictions($query)
+    {
+        return $query
+            ->orderBy('date_start', 'asc')
+            ->orderBy('date_end', 'asc');
+    }
+
     public function isCurrent()
     {
         $today = now()->startOfDay();
