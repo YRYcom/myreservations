@@ -6,6 +6,9 @@ return [
     'logout' => 'Se déconnecter',
 
     'resources.biens.name' => 'Nom',
+    'resources.biens.capacity' => 'Nombre de places',
+    'resources.biens.capacity.helper' => 'Nombre de personnes pouvant être dans ce bien',
+    'resources.biens.capacity.column' => 'Places',
     'resources.biens.created_at' => 'Créé le',
     'resources.biens.updated_at' => 'Mis à jour le',
     'resources.biens.delete' => 'Supprimer',
@@ -49,4 +52,9 @@ return [
     'resources.reservations.filters.hide_finished' => 'Masquer les réservations terminées',
     'resources.reservations.filters.error' => 'Erreur',
     'resources.reservations.filters.update_error' => 'Une erreur s\'est produite lors de la mise à jour du filtre.',
+    
+    'resources.reservations.number_of_guests' => 'Nombre de personnes',
+    'resources.reservations.capacity.max' => 'Capacité maximale : :capacity personne(s) (réservées sur cette période : :booked)',
+    'resources.reservations.capacity.select_dates' => 'Capacité maximale : :capacity personne(s) (sélectionnez les dates pour voir les réservations)',
+    'resources.reservations.capacity.select_property' => 'Sélectionnez un bien pour voir la capacité',
 ];

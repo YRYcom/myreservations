@@ -47,6 +47,10 @@ class ReservationsTable
                     ->label(__('filament.resources.reservations.bien.name'))
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('number_of_guests')
+                    ->label('Nb. personnes')
+                    ->alignCenter()
+                    ->sortable(),
                 TextColumn::make('date_start')
                     ->label(__('filament.resources.reservations.date_start'))
                     ->date('d/m/Y')

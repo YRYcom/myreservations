@@ -14,6 +14,13 @@ class BienForm
                 TextInput::make('name')
                     ->label(__('filament.resources.biens.name'))
                     ->required(),
+                TextInput::make('capacity')
+                    ->label(__('filament.resources.biens.capacity'))
+                    ->required()
+                    ->numeric()
+                    ->minValue(1)
+                    ->default(1)
+                    ->helperText(__('filament.resources.biens.capacity.helper')),
             ]);
     }
 }

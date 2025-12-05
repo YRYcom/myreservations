@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Bien;
 use App\Models\User;
 use App\Models\Occupant;
+use App\Models\Reservation;
 
 class ReservationForm
 {
@@ -111,7 +112,48 @@ class ReservationForm
                     ->rules(['after_or_equal:date_start'])
                     ->validationMessages([
                         'after_or_equal' => 'La date de fin doit être postérieure ou égale à la date de début.',
-                    ]),
+                    ])
+                    ->live(),
+                TextInput::make('number_of_guests')
+                    ->label(__('filament.resources.reservations.number_of_guests'))
+                    ->required()
+                    ->numeric()
+                    ->minValue(1)
+                    ->default(1)
+                    ->live()
+                    ->helperText(function ($get, $record) {
+                        $bienId = $get('bien_id');
+                        $dateStart = $get('date_start');
+                        $dateEnd = $get('date_end');
+                        
+                        if ($bienId) {
+                            $bien = Bien::find($bienId);
+                            if ($bien && $bien->capacity) {
+                                if ($dateStart && $dateEnd) {
+                                    $query = Reservation::where('bien_id', $bienId)
+                                        ->where('date_end', '>=', $dateStart)
+                                        ->where('date_start', '<=', $dateEnd);
+                                    
+                                    if ($record && $record->id) {
+                                        $query->where('id', '!=', $record->id);
+                                    }
+                                    
+                                    $overlappingReservations = $query->get();
+                                    $alreadyBooked = $overlappingReservations->sum('number_of_guests');
+                                    
+                                    return __('filament.resources.reservations.capacity.max', [
+                                        'capacity' => $bien->capacity,
+                                        'booked' => $alreadyBooked
+                                    ]);
+                                }
+                                
+                                return __('filament.resources.reservations.capacity.select_dates', [
+                                    'capacity' => $bien->capacity
+                                ]);
+                            }
+                        }
+                        return __('filament.resources.reservations.capacity.select_property');
+                    }),
                 Textarea::make('comment')
                     ->columnSpanFull()
                     ->label(__('filament.resources.reservations.comment')),
