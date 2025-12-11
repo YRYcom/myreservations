@@ -173,7 +173,11 @@ class ReservationForm
                                 $reservedOnDate = $queryDate->sum('number_of_guests');
                                 
                                 if ($reservedOnDate + $numberOfGuests > $bien->capacity) {
-                                    $conflictingDates[] = $date->format('d/m/Y') . ' (' . ($reservedOnDate + $numberOfGuests) . '/' . $bien->capacity . ')';
+                                    $excess = ($reservedOnDate + $numberOfGuests) - $bien->capacity;
+                                    $personneText = $excess > 1 
+                                        ? __('filament.resources.reservations.capacity.excess_plural') 
+                                        : __('filament.resources.reservations.capacity.excess_singular');
+                                    $conflictingDates[] = $date->format('d/m/Y') . ' (' . $excess . ' ' . $personneText . ')';
                                 }
                             }
                             

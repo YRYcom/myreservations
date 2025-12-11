@@ -57,7 +57,9 @@ return [
     'resources.reservations.capacity.max' => 'Capacité maximale : :capacity personne(s) (réservées sur cette période : :booked)',
     'resources.reservations.capacity.select_dates' => 'Capacité maximale : :capacity personne(s) (sélectionnez les dates pour voir les réservations)',
     'resources.reservations.capacity.select_property' => 'Sélectionnez un bien pour voir la capacité',
-    'resources.reservations.capacity.exceeded' => '⚠️ ATTENTION : La capacité du bien (:capacity personne(s)) sera dépassée sur les dates suivantes :',
-    'resources.reservations.number_of_guests' => 'Nombre de personnes',
+    'resources.reservations.capacity.exceeded' => '⚠️ Attention : certaines dates de votre séjour dépassent la capacité d\'accueil du logement.
+D\'autres réservations remplissent déjà la capacité d\'accueil du logement aux dates suivantes :',
+    'resources.reservations.capacity.excess_singular' => 'personne en trop',
+    'resources.reservations.capacity.excess_plural' => 'personnes en trop',
     
 ];
