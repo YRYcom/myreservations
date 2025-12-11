@@ -12,6 +12,8 @@ class Bien extends Model
     protected $fillable = [
         'name',
         'capacity',
+        'arrivals_consignes',
+        'departures_consignes',
     ];
 
     public function user()
