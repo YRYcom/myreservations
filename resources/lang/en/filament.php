@@ -58,4 +58,5 @@ return [
     'resources.reservations.capacity.select_dates' => 'Maximum capacity: :capacity person(s) (select dates to see reservations)',
     'resources.reservations.capacity.select_property' => 'Select a property to see capacity',
     'resources.reservations.capacity.exceeded' => '⚠️ WARNING: The property capacity (:capacity person(s)) will be exceeded on the following dates:',
+    'ressources.reservations.number_of_guests' => 'Number of guests',
 ];

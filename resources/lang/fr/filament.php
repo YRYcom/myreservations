@@ -58,5 +58,6 @@ return [
     'resources.reservations.capacity.select_dates' => 'Capacité maximale : :capacity personne(s) (sélectionnez les dates pour voir les réservations)',
     'resources.reservations.capacity.select_property' => 'Sélectionnez un bien pour voir la capacité',
     'resources.reservations.capacity.exceeded' => '⚠️ ATTENTION : La capacité du bien (:capacity personne(s)) sera dépassée sur les dates suivantes :',
+    'resources.reservations.number_of_guests' => 'Nombre de personnes',
     
 ];

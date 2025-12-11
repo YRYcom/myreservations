@@ -48,7 +48,7 @@ class ReservationsTable
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('number_of_guests')
-                    ->label('Nb. personnes')
+                    ->label(__('filament.resources.reservations.number_of_guests'))
                     ->alignCenter()
                     ->sortable(),
                 TextColumn::make('date_start')
