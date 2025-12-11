@@ -10,6 +10,7 @@ class Reservation extends Model
         'user_id',
         'bien_id',
         'occupant_id',
+        'number_of_guests',
         'date_start',
         'date_end',
         'comment',

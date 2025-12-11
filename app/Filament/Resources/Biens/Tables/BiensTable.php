@@ -17,6 +17,10 @@ class BiensTable
                 TextColumn::make('name')
                     ->label(__('filament.resources.biens.name'))
                     ->searchable(),
+                TextColumn::make('capacity')
+                    ->label(__('filament.resources.biens.capacity.column'))
+                    ->sortable()
+                    ->suffix(' pers.'),
                 TextColumn::make('created_at')
                     ->label(__('filament.resources.biens.created_at'))
                     ->dateTime()

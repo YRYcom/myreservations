@@ -6,6 +6,9 @@ return [
     'logout' => 'Logout',
 
     'resources.biens.name' => 'Name',
+    'resources.biens.capacity' => 'Number of places',
+    'resources.biens.capacity.helper' => 'Number of people who can be in this property',
+    'resources.biens.capacity.column' => 'Places',
     'resources.biens.created_at' => 'Created at',
     'resources.biens.updated_at' => 'Updated at',
     'resources.biens.delete' => 'Delete',
@@ -49,4 +52,13 @@ return [
     'resources.reservations.filters.hide_finished' => 'Hide finished reservations',
     'resources.reservations.filters.error' => 'Error',
     'resources.reservations.filters.update_error' => 'An error occurred while updating the filter.',
+    
+    'resources.reservations.number_of_guests' => 'Number of guests',
+    'resources.reservations.capacity.max' => 'Maximum capacity: :capacity person(s) (booked for this period: :booked)',
+    'resources.reservations.capacity.select_dates' => 'Maximum capacity: :capacity person(s) (select dates to see reservations)',
+    'resources.reservations.capacity.select_property' => 'Select a property to see capacity',
+    'resources.reservations.capacity.exceeded' => '⚠️ Warning: some dates of your stay exceed the property\'s capacity.
+Other reservations already fill the property\'s capacity on the following dates:',
+    'resources.reservations.capacity.excess_singular' => 'person over capacity',
+    'resources.reservations.capacity.excess_plural' => 'people over capacity',
 ];
