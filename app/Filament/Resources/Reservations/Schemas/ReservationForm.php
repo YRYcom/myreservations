@@ -12,6 +12,7 @@ use App\Models\Bien;
 use App\Models\User;
 use App\Models\Occupant;
 use App\Models\Reservation;
+use Carbon\Carbon;
 
 class ReservationForm
 {
@@ -125,34 +126,72 @@ class ReservationForm
                         $bienId = $get('bien_id');
                         $dateStart = $get('date_start');
                         $dateEnd = $get('date_end');
+                        $numberOfGuests = (int) $get('number_of_guests');
                         
-                        if ($bienId) {
-                            $bien = Bien::find($bienId);
-                            if ($bien && $bien->capacity) {
-                                if ($dateStart && $dateEnd) {
-                                    $query = Reservation::where('bien_id', $bienId)
-                                        ->where('date_end', '>=', $dateStart)
-                                        ->where('date_start', '<=', $dateEnd);
-                                    
-                                    if ($record && $record->id) {
-                                        $query->where('id', '!=', $record->id);
-                                    }
-                                    
-                                    $overlappingReservations = $query->get();
-                                    $alreadyBooked = $overlappingReservations->sum('number_of_guests');
-                                    
-                                    return __('filament.resources.reservations.capacity.max', [
-                                        'capacity' => $bien->capacity,
-                                        'booked' => $alreadyBooked
-                                    ]);
+                        if (!$bienId) {
+                            return __('filament.resources.reservations.capacity.select_property');
+                        }
+                        
+                        $bien = Bien::find($bienId);
+                        if (!$bien || !$bien->capacity) {
+                            return null;
+                        }
+                        
+                        if (!$dateStart || !$dateEnd) {
+                            return __('filament.resources.reservations.capacity.select_dates', [
+                                'capacity' => $bien->capacity
+                            ]);
+                        }
+                        
+                        $query = Reservation::where('bien_id', $bienId)
+                            ->where('date_end', '>=', $dateStart)
+                            ->where('date_start', '<=', $dateEnd);
+                        
+                        if ($record && $record->id) {
+                            $query->where('id', '!=', $record->id);
+                        }
+                        
+                        $overlappingReservations = $query->get();
+                        $alreadyBooked = $overlappingReservations->sum('number_of_guests');
+                        
+                        if ($numberOfGuests > 0) {
+                            $start = Carbon::parse($dateStart);
+                            $end = Carbon::parse($dateEnd);
+                            $conflictingDates = [];
+                            
+                            for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
+                                $dateString = $date->format('Y-m-d');
+                                
+                                $queryDate = Reservation::where('bien_id', $bienId)
+                                    ->whereDate('date_start', '<=', $dateString)
+                                    ->whereDate('date_end', '>=', $dateString);
+                                
+                                if ($record && $record->id) {
+                                    $queryDate->where('id', '!=', $record->id);
                                 }
                                 
-                                return __('filament.resources.reservations.capacity.select_dates', [
-                                    'capacity' => $bien->capacity
-                                ]);
+                                $reservedOnDate = $queryDate->sum('number_of_guests');
+                                
+                                if ($reservedOnDate + $numberOfGuests > $bien->capacity) {
+                                    $conflictingDates[] = $date->format('d/m/Y') . ' (' . ($reservedOnDate + $numberOfGuests) . '/' . $bien->capacity . ')';
+                                }
+                            }
+                            
+                            if (!empty($conflictingDates)) {
+                                $datesList = implode(', ', $conflictingDates);
+                                return new \Illuminate\Support\HtmlString(
+                                    '<div style="color: #dc2626; font-weight: 600; margin-top: 0.5rem;">' .
+                                    __('filament.resources.reservations.capacity.exceeded', ['capacity' => $bien->capacity]) .
+                                    '</div>' .
+                                    '<div style="color: #dc2626; margin-top: 0.25rem;">' . $datesList . '</div>'
+                                );
                             }
                         }
-                        return __('filament.resources.reservations.capacity.select_property');
+                        
+                        return __('filament.resources.reservations.capacity.max', [
+                            'capacity' => $bien->capacity,
+                            'booked' => $alreadyBooked
+                        ]);
                     }),
                 Textarea::make('comment')
                     ->columnSpanFull()
