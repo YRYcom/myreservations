@@ -50,4 +50,19 @@ class CreateReservation extends CreateRecord
     {
         return __('filament.resources.reservations.create');
     }
+
+    protected function getFormActions(): array
+    {
+        $actions = [
+            $this->getCreateFormAction(),
+        ];
+
+        if (auth()->user()?->hasRole('admin')) {
+            $actions[] = $this->getCreateAnotherFormAction();
+        }
+
+        $actions[] = $this->getCancelFormAction();
+
+        return $actions;
+    }
 }

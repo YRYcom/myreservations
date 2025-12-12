@@ -14,6 +14,21 @@ class CreateUser extends CreateRecord
         return __('filament.resources.users.create');
     }
 
+    protected function getFormActions(): array
+    {
+        $actions = [
+            $this->getCreateFormAction(),
+        ];
+
+        if (auth()->user()?->hasRole('admin')) {
+            $actions[] = $this->getCreateAnotherFormAction();
+        }
+
+        $actions[] = $this->getCancelFormAction();
+
+        return $actions;
+    }
+
     protected function afterCreate(): void
     {
         $data = $this->form->getState();

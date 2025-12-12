@@ -13,4 +13,19 @@ class CreateBien extends CreateRecord
     {
         return __('filament.resources.biens.create');
     }
+
+    protected function getFormActions(): array
+    {
+        $actions = [
+            $this->getCreateFormAction(),
+        ];
+
+        if (auth()->user()?->hasRole('admin')) {
+            $actions[] = $this->getCreateAnotherFormAction();
+        }
+
+        $actions[] = $this->getCancelFormAction();
+
+        return $actions;
+    }
 }
