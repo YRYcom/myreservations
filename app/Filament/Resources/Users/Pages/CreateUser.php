@@ -13,4 +13,23 @@ class CreateUser extends CreateRecord
     {
         return __('filament.resources.users.create');
     }
+
+    protected function afterCreate(): void
+    {
+        $data = $this->form->getState();
+        $user = $this->getRecord();
+        
+        if (isset($data['biens_with_profile']) && is_array($data['biens_with_profile'])) {
+            $syncData = [];
+            foreach ($data['biens_with_profile'] as $item) {
+                if (isset($item['bien_id'])) {
+                    $syncData[$item['bien_id']] = [
+                        'profile' => $item['profile'] ?? 'utilisateur'
+                    ];
+                }
+            }
+            
+            $user->biens()->sync($syncData);
+        }
+    }
 }
