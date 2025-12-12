@@ -42,12 +42,50 @@ class UserForm
                         'required' => __('filament.roles_required'),
                     ]),
                         
-                Select::make('biens')
+                \Filament\Forms\Components\Repeater::make('biens_with_profile')
                     ->label(__('filament.resources.users.biens'))
-                    ->relationship('biens', 'name')
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
+                    ->schema([
+                        Select::make('bien_id')
+                            ->label(__('filament.resources.users.biens.select'))
+                            ->options(\App\Models\Bien::pluck('name', 'id'))
+                            ->searchable()
+                            ->required()
+                            ->disableOptionsWhenSelectedInSiblingRepeaterItems(),
+                        Select::make('profile')
+                            ->label(__('filament.resources.users.profile'))
+                            ->options(\App\Enums\ProfileType::options())
+                            ->default('utilisateur')
+                            ->required(),
+                    ])
+                    ->columns(2)
+                    ->defaultItems(0)
+                    ->addActionLabel(__('filament.resources.users.biens.add'))
+                    ->mutateRelationshipDataBeforeFillUsing(function (array $data): array {
+                        return [
+                            'bien_id' => $data['id'],
+                            'profile' => $data['pivot']['profile'] ?? 'utilisateur',
+                        ];
+                    })
+                    ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                        return $data;
+                    })
+                    ->saveRelationshipsUsing(function ($component, $state, $record) {
+                        if (!$record) {
+                            return;
+                        }
+                        
+                        $syncData = [];
+                        foreach ($state ?? [] as $item) {
+                            if (isset($item['bien_id'])) {
+                                $syncData[$item['bien_id']] = [
+                                    'profile' => $item['profile'] ?? 'utilisateur'
+                                ];
+                            }
+                        }
+                        
+                        $record->biens()->sync($syncData);
+                    })
+                    ->dehydrated(false)
             ]);
     }
 }
