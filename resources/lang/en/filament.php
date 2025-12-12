@@ -30,7 +30,13 @@ return [
     'resources.users.title' => 'Users',
     'resources.users.role' => 'Role',
     'resources.users.biens' => 'Property(ies) assigned',
+    'resources.users.biens.add' => 'Assign a property',
+    'resources.users.biens.select' => 'Select a property',
+    'resources.users.profile' => 'Profile',
     'roles_required' => 'The role is required.',
+
+    'enums.profile_type.utilisateur' => 'User',
+    'enums.profile_type.gestionnaire' => 'Manager',
 
     'dashboard_title' => 'Properties available for reservation',
 

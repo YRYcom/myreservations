@@ -30,7 +30,13 @@ return [
     'resources.users.title' => 'Utilisateurs',
     'resources.users.role' => 'Rôle',
     'resources.users.biens' => 'Bien(s) attribué(s)',
+    'resources.users.biens.add' => 'Ajouter un bien',
+    'resources.users.biens.select' => 'Sélectionner un bien',
+    'resources.users.profile' => 'Profil',
     'roles_required' => 'Le rôle est obligatoire.',
+
+    'enums.profile_type.utilisateur' => 'Utilisateur',
+    'enums.profile_type.gestionnaire' => 'Gestionnaire',
 
     'dashboard_title' => 'Biens disponibles à la réservation',
 
