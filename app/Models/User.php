@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function biens()
     {
-        return $this->belongsToMany(Bien::class);
+        return $this->belongsToMany(Bien::class)->withPivot('profile');
     }
 
     public function getAccessibleBiens()
