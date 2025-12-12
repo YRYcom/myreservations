@@ -14,6 +14,7 @@ class Reservation extends Model
         'date_start',
         'date_end',
         'comment',
+        'status',
     ];
 
     protected function casts(): array
@@ -21,6 +22,7 @@ class Reservation extends Model
         return [
             'date_start' => 'date',
             'date_end' => 'date',
+            'status' => \App\Enums\ReservationStatus::class,
         ];
     }
 
@@ -37,6 +39,11 @@ class Reservation extends Model
     public function occupant()
     {
         return $this->belongsTo(Occupant::class);
+    }
+
+    public function statusHistory()
+    {
+        return $this->hasMany(ReservationStatusHistory::class)->orderBy('created_at', 'desc');
     }
 
     public function scopeOrderedByStartDate($query)
@@ -57,5 +64,50 @@ class Reservation extends Model
     public function isCurrent()
     {
         return today()->between($this->date_start, $this->date_end);
+    }
+
+    public function canBeApprovedBy(User $user): bool
+    {
+        $managerBien = $user->biens()->where('biens.id', $this->bien_id)->first();
+        
+        if (!$managerBien) {
+            return false;
+        }
+        
+        return $managerBien->pivot->profile === 'gestionnaire';
+    }
+
+    public function approve(?string $comment = null, ?int $userId = null): void
+    {
+        $this->status = \App\Enums\ReservationStatus::Accepte;
+        $this->save();
+        
+        $this->logStatusChange(\App\Enums\ReservationStatus::Accepte, $comment, $userId);
+    }
+
+    public function reject(?string $comment = null, ?int $userId = null): void
+    {
+        $this->status = \App\Enums\ReservationStatus::Refuse;
+        $this->save();
+        
+        $this->logStatusChange(\App\Enums\ReservationStatus::Refuse, $comment, $userId);
+    }
+
+    public function resetToPending(?string $comment = null, ?int $userId = null): void
+    {
+        $this->status = \App\Enums\ReservationStatus::EnAttente;
+        $this->save();
+        
+        $this->logStatusChange(\App\Enums\ReservationStatus::EnAttente, $comment, $userId);
+    }
+
+    public function logStatusChange(\App\Enums\ReservationStatus $status, ?string $comment = null, ?int $userId = null): void
+    {
+        ReservationStatusHistory::create([
+            'reservation_id' => $this->id,
+            'status' => $status,
+            'user_id' => $userId,
+            'comment' => $comment,
+        ]);
     }
 }

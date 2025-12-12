@@ -67,6 +67,21 @@ return [
 D\'autres réservations remplissent déjà la capacité d\'accueil du logement aux dates suivantes :',
     'resources.reservations.capacity.excess_singular' => 'personne en trop',
     'resources.reservations.capacity.excess_plural' => 'personnes en trop',
+    'resources.reservations.status' => 'Statut',
+    'resources.reservations.status_history' => 'Historique des statuts',
+    'resources.reservations.approve' => 'Accepter',
+    'resources.reservations.reject' => 'Refuser',
+    'resources.reservations.reset_to_pending' => 'Remettre en Attente',
+    'resources.reservations.approval_comment' => 'Commentaire',
+    'resources.reservations.approval_comment_placeholder' => 'Raison de l\'acceptation ou du refus (optionnel)',
+    
     'resources.biens.description' => 'Description',
+    
+    'enums.reservation_status.en_attente' => 'En attente',
+    'enums.reservation_status.accepte' => 'Accepté',
+    'enums.reservation_status.refuse' => 'Refusé',
+    
+    'dashboard.pending_reservations' => 'Réservations en attente de validation',
+    'dashboard.no_pending_reservations' => 'Aucune réservation en attente',
     
 ];

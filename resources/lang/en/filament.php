@@ -67,5 +67,21 @@ return [
 Other reservations already fill the property\'s capacity on the following dates:',
     'resources.reservations.capacity.excess_singular' => 'person over capacity',
     'resources.reservations.capacity.excess_plural' => 'people over capacity',
+    'resources.reservations.status' => 'Status',
+    'resources.reservations.status_history' => 'Status History',
+    'resources.reservations.approve' => 'Approve',
+    'resources.reservations.reject' => 'Reject',
+    'resources.reservations.reset_to_pending' => 'Reset to Pending',
+    'resources.reservations.approval_comment' => 'Comment',
+    'resources.reservations.approval_comment_placeholder' => 'Reason for approval or rejection (optional)',
+    
     'resources.biens.description' => 'Description',
+    
+    'enums.reservation_status.en_attente' => 'Pending',
+    'enums.reservation_status.accepte' => 'Accepted',
+    'enums.reservation_status.refuse' => 'Rejected',
+
+    
+    'dashboard.pending_reservations' => 'Pending Reservations',
+    'dashboard.no_pending_reservations' => 'No pending reservations',
 ];
