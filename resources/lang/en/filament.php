@@ -61,4 +61,5 @@ return [
 Other reservations already fill the property\'s capacity on the following dates:',
     'resources.reservations.capacity.excess_singular' => 'person over capacity',
     'resources.reservations.capacity.excess_plural' => 'people over capacity',
+    'resources.biens.description' => 'Description',
 ];

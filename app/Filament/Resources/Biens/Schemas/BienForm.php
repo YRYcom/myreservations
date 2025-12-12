@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Biens\Schemas;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Schema;
 
 class BienForm
@@ -20,6 +21,9 @@ class BienForm
                     ->numeric()
                     ->minValue(1)
                     ->default(1),
+                RichEditor::make('description')
+                    ->label(__('filament.resources.biens.description'))
+                    ->columnSpanFull(),
             ]);
     }
 }

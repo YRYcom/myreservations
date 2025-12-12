@@ -61,5 +61,6 @@ return [
 D\'autres réservations remplissent déjà la capacité d\'accueil du logement aux dates suivantes :',
     'resources.reservations.capacity.excess_singular' => 'personne en trop',
     'resources.reservations.capacity.excess_plural' => 'personnes en trop',
+    'resources.biens.description' => 'Description',
     
 ];
