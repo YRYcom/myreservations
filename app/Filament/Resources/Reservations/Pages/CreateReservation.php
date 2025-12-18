@@ -44,6 +44,18 @@ class CreateReservation extends CreateRecord
             'Création de la réservation',
             null
         );
+        
+        \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+            ->send(new \App\Mail\ReservationPendingUserNotification($reservation));
+        
+        $managers = $reservation->bien->users()
+            ->wherePivot('profile', 'gestionnaire')
+            ->get();
+        
+        foreach ($managers as $manager) {
+            \Illuminate\Support\Facades\Mail::to($manager->email)
+                ->send(new \App\Mail\ReservationPendingManagerNotification($reservation));
+        }
     }
 
     public function getTitle(): string

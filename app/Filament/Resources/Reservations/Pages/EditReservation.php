@@ -39,6 +39,10 @@ class EditReservation extends EditRecord
                 ])
                 ->action(function (array $data) use ($reservation, $user) {
                     $reservation->approve($data['comment'] ?? null, $user->id);
+                    
+                    \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                        ->send(new \App\Mail\ReservationApprovedNotification($reservation, $data['comment'] ?? null));
+                    
                     \Filament\Notifications\Notification::make()
                         ->success()
                         ->title(__('filament.enums.reservation_status.accepte'))
@@ -63,6 +67,10 @@ class EditReservation extends EditRecord
                 ])
                 ->action(function (array $data) use ($reservation, $user) {
                     $reservation->reject($data['comment'] ?? null, $user->id);
+                    
+                    \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                        ->send(new \App\Mail\ReservationRejectedNotification($reservation, $data['comment'] ?? null));
+                    
                     \Filament\Notifications\Notification::make()
                         ->success()
                         ->title(__('filament.enums.reservation_status.refuse'))
@@ -86,6 +94,19 @@ class EditReservation extends EditRecord
                 ])
                 ->action(function (array $data) use ($reservation, $user) {
                     $reservation->resetToPending($data['comment'] ?? null, $user->id);
+                    
+                    \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                        ->send(new \App\Mail\ReservationPendingUserNotification($reservation));
+                    
+                    $managers = $reservation->bien->users()
+                        ->wherePivot('profile', 'gestionnaire')
+                        ->get();
+                    
+                    foreach ($managers as $manager) {
+                        \Illuminate\Support\Facades\Mail::to($manager->email)
+                            ->send(new \App\Mail\ReservationPendingManagerNotification($reservation));
+                    }
+                    
                     \Filament\Notifications\Notification::make()
                         ->success()
                         ->title(__('filament.enums.reservation_status.en_attente'))
