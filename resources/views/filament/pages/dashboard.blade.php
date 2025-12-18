@@ -1,4 +1,36 @@
 <x-filament-panels::page>
+    @if($pendingReservations->count() > 0)
+        <div style="margin-bottom: 2rem; padding: 1.5rem; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 0.5rem;">
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #92400e;">
+                {{ __('filament.dashboard.pending_reservations') }}
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                @foreach($pendingReservations as $reservation)
+                    <div style="padding: 1rem; background: white; border-radius: 0.5rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+                        <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; color: #111827; margin-bottom: 0.5rem;">
+                                    {{ $reservation->bien->name }}
+                                </div>
+                                <div style="font-size: 0.875rem; color: #6b7280;">
+                                    <div>Occupant: <span style="font-weight: 500;">{{ $reservation->occupant->name }}</span></div>
+                                    <div>Dates: {{ $reservation->date_start->format('d/m/Y') }} - {{ $reservation->date_end->format('d/m/Y') }}</div>
+                                    <div>Personnes: {{ $reservation->number_of_guests }}</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <a href="{{ \App\Filament\Resources\Reservations\ReservationResource::getUrl('edit', ['record' => $reservation->id]) }}" 
+                                   style="display: inline-block; padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; text-decoration: none; font-size: 0.875rem; font-weight: 500;">
+                                    Gérer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
     <div class="biens-container">
         @if($biens->count() > 0)
             <div class="biens-grid">

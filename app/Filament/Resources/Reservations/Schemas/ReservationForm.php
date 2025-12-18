@@ -173,7 +173,11 @@ class ReservationForm
                                 $reservedOnDate = $queryDate->sum('number_of_guests');
                                 
                                 if ($reservedOnDate + $numberOfGuests > $bien->capacity) {
-                                    $conflictingDates[] = $date->format('d/m/Y') . ' (' . ($reservedOnDate + $numberOfGuests) . '/' . $bien->capacity . ')';
+                                    $excess = ($reservedOnDate + $numberOfGuests) - $bien->capacity;
+                                    $personneText = $excess > 1 
+                                        ? __('filament.resources.reservations.capacity.excess_plural') 
+                                        : __('filament.resources.reservations.capacity.excess_singular');
+                                    $conflictingDates[] = $date->format('d/m/Y') . ' (' . $excess . ' ' . $personneText . ')';
                                 }
                             }
                             
@@ -196,6 +200,14 @@ class ReservationForm
                 Textarea::make('comment')
                     ->columnSpanFull()
                     ->label(__('filament.resources.reservations.comment')),
+                \Filament\Forms\Components\ViewField::make('status')
+                    ->view('filament.forms.components.status-badge')
+                    ->viewData(fn ($record) => [
+                        'color' => $record?->status?->color() ?? 'warning',
+                        'label' => $record?->status?->label() ?? __('filament.enums.reservation_status.en_attente'),
+                        'statusLabel' => __('filament.resources.reservations.status'),
+                    ])
+                    ->visible(fn ($context) => $context === 'edit'),
             ]);
     }
 }

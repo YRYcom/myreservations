@@ -30,7 +30,20 @@ class CreateReservation extends CreateRecord
             $data['user_id'] = auth()->id();
         }
         
+        $data['status'] = \App\Enums\ReservationStatus::EnAttente->value;
+        
         return $data;
+    }
+
+    protected function afterCreate(): void
+    {
+        $reservation = $this->getRecord();
+        
+        $reservation->logStatusChange(
+            \App\Enums\ReservationStatus::EnAttente,
+            'Création de la réservation',
+            null
+        );
     }
 
     public function getTitle(): string

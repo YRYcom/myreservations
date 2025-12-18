@@ -30,7 +30,13 @@ return [
     'resources.users.title' => 'Utilisateurs',
     'resources.users.role' => 'Rôle',
     'resources.users.biens' => 'Bien(s) attribué(s)',
+    'resources.users.biens.add' => 'Ajouter un bien',
+    'resources.users.biens.select' => 'Sélectionner un bien',
+    'resources.users.profile' => 'Profil',
     'roles_required' => 'Le rôle est obligatoire.',
+
+    'enums.profile_type.utilisateur' => 'Utilisateur',
+    'enums.profile_type.gestionnaire' => 'Gestionnaire',
 
     'dashboard_title' => 'Biens disponibles à la réservation',
 
@@ -48,8 +54,8 @@ return [
     'resources.reservations.comment' => 'Commentaire',
     'resources.reservations.occupant' => 'Occupant',
     'resources.reservations.occupant.name.unique' => 'Le nom de l\'occupant doit être unique.',
-    'resources.reservations.filters.show_finished' => 'Afficher les réservations terminées',
-    'resources.reservations.filters.hide_finished' => 'Masquer les réservations terminées',
+    'resources.reservations.filters.show_finished' => 'Afficher les réservations terminées et refusées',
+    'resources.reservations.filters.hide_finished' => 'Masquer les réservations terminées et refusées',
     'resources.reservations.filters.error' => 'Erreur',
     'resources.reservations.filters.update_error' => 'Une erreur s\'est produite lors de la mise à jour du filtre.',
     
@@ -57,6 +63,25 @@ return [
     'resources.reservations.capacity.max' => 'Capacité maximale : :capacity personne(s) (réservées sur cette période : :booked)',
     'resources.reservations.capacity.select_dates' => 'Capacité maximale : :capacity personne(s) (sélectionnez les dates pour voir les réservations)',
     'resources.reservations.capacity.select_property' => 'Sélectionnez un bien pour voir la capacité',
-    'resources.reservations.capacity.exceeded' => '⚠️ ATTENTION : La capacité du bien (:capacity personne(s)) sera dépassée sur les dates suivantes :',
+    'resources.reservations.capacity.exceeded' => '⚠️ Attention : certaines dates de votre séjour dépassent la capacité d\'accueil du logement.
+D\'autres réservations remplissent déjà la capacité d\'accueil du logement aux dates suivantes :',
+    'resources.reservations.capacity.excess_singular' => 'personne en trop',
+    'resources.reservations.capacity.excess_plural' => 'personnes en trop',
+    'resources.reservations.status' => 'Statut',
+    'resources.reservations.status_history' => 'Historique des statuts',
+    'resources.reservations.approve' => 'Accepter',
+    'resources.reservations.reject' => 'Refuser',
+    'resources.reservations.reset_to_pending' => 'Remettre en Attente',
+    'resources.reservations.approval_comment' => 'Commentaire',
+    'resources.reservations.approval_comment_placeholder' => 'Raison de l\'acceptation ou du refus (optionnel)',
+    
+    'resources.biens.description' => 'Description',
+    
+    'enums.reservation_status.en_attente' => 'En attente',
+    'enums.reservation_status.accepte' => 'Accepté',
+    'enums.reservation_status.refuse' => 'Refusé',
+    
+    'dashboard.pending_reservations' => 'Réservations en attente de validation',
+    'dashboard.no_pending_reservations' => 'Aucune réservation en attente',
     
 ];

@@ -12,6 +12,7 @@ class Bien extends Model
     protected $fillable = [
         'name',
         'capacity',
+        'description',  
     ];
 
     public function user()
@@ -21,7 +22,7 @@ class Bien extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('profile');
     }
 
     public function reservations()

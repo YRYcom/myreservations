@@ -35,6 +35,7 @@ class Dashboard extends Page
             return [
                 'biens' => collect([]),
                 'user' => null,
+                'pendingReservations' => collect([]),
             ];
         }
         
@@ -43,9 +44,24 @@ class Dashboard extends Page
             $query->with(['user', 'bien'])->orderedByStartDate();
         }]);
         
+        $managedBienIds = $user->biens()
+            ->wherePivot('profile', 'gestionnaire')
+            ->pluck('biens.id')
+            ->toArray();
+        
+        $pendingReservations = collect([]);
+        if (!empty($managedBienIds)) {
+            $pendingReservations = Reservation::with(['bien', 'occupant', 'user'])
+                ->whereIn('bien_id', $managedBienIds)
+                ->where('status', \App\Enums\ReservationStatus::EnAttente)
+                ->orderBy('date_start', 'asc')
+                ->get();
+        }
+        
         return [
             'biens' => $biens,
             'user' => $user,
+            'pendingReservations' => $pendingReservations,
         ];
     }
 

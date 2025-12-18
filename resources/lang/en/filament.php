@@ -30,7 +30,13 @@ return [
     'resources.users.title' => 'Users',
     'resources.users.role' => 'Role',
     'resources.users.biens' => 'Property(ies) assigned',
+    'resources.users.biens.add' => 'Assign a property',
+    'resources.users.biens.select' => 'Select a property',
+    'resources.users.profile' => 'Profile',
     'roles_required' => 'The role is required.',
+
+    'enums.profile_type.utilisateur' => 'User',
+    'enums.profile_type.gestionnaire' => 'Manager',
 
     'dashboard_title' => 'Properties available for reservation',
 
@@ -48,8 +54,8 @@ return [
     'resources.reservations.comment' => 'Comment',
     'resources.reservations.occupant' => 'Occupant',
     'resources.reservations.occupant.name.unique' => 'The occupant name must be unique.',
-    'resources.reservations.filters.show_finished' => 'Show finished reservations',
-    'resources.reservations.filters.hide_finished' => 'Hide finished reservations',
+    'resources.reservations.filters.show_finished' => 'Show finished and refused reservations',
+    'resources.reservations.filters.hide_finished' => 'Hide finished and refused reservations',
     'resources.reservations.filters.error' => 'Error',
     'resources.reservations.filters.update_error' => 'An error occurred while updating the filter.',
     
@@ -57,5 +63,25 @@ return [
     'resources.reservations.capacity.max' => 'Maximum capacity: :capacity person(s) (booked for this period: :booked)',
     'resources.reservations.capacity.select_dates' => 'Maximum capacity: :capacity person(s) (select dates to see reservations)',
     'resources.reservations.capacity.select_property' => 'Select a property to see capacity',
-    'resources.reservations.capacity.exceeded' => '⚠️ WARNING: The property capacity (:capacity person(s)) will be exceeded on the following dates:',
+    'resources.reservations.capacity.exceeded' => '⚠️ Warning: some dates of your stay exceed the property\'s capacity.
+Other reservations already fill the property\'s capacity on the following dates:',
+    'resources.reservations.capacity.excess_singular' => 'person over capacity',
+    'resources.reservations.capacity.excess_plural' => 'people over capacity',
+    'resources.reservations.status' => 'Status',
+    'resources.reservations.status_history' => 'Status History',
+    'resources.reservations.approve' => 'Approve',
+    'resources.reservations.reject' => 'Reject',
+    'resources.reservations.reset_to_pending' => 'Reset to Pending',
+    'resources.reservations.approval_comment' => 'Comment',
+    'resources.reservations.approval_comment_placeholder' => 'Reason for approval or rejection (optional)',
+    
+    'resources.biens.description' => 'Description',
+    
+    'enums.reservation_status.en_attente' => 'Pending',
+    'enums.reservation_status.accepte' => 'Accepted',
+    'enums.reservation_status.refuse' => 'Rejected',
+
+    
+    'dashboard.pending_reservations' => 'Pending Reservations',
+    'dashboard.no_pending_reservations' => 'No pending reservations',
 ];
