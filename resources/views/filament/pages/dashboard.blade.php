@@ -1,5 +1,4 @@
 <x-filament-panels::page>
-    {{-- Pending Reservations for Managers --}}
     @if($pendingReservations->count() > 0)
         <div style="margin-bottom: 2rem; padding: 1.5rem; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 0.5rem;">
             <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #92400e;">

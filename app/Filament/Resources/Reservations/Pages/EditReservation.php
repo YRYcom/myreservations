@@ -17,15 +17,12 @@ class EditReservation extends EditRecord
         
         $actions = [];
         
-        // Le bouton supprimer est visible uniquement pour les administrateurs
         if ($user && $user->hasRole('admin')) {
             $actions[] = DeleteAction::make();
         }
 
         
-        // Actions de changement de statut pour les gestionnaires
         if ($reservation && $user && $reservation->canBeApprovedBy($user)) {
-            // Action "Accepter" - visible si statut = En Attente ou Refusé
             $actions[] = \Filament\Actions\Action::make('approve')
                 ->label(__('filament.resources.reservations.approve'))
                 ->icon('heroicon-o-check-circle')
@@ -49,7 +46,6 @@ class EditReservation extends EditRecord
                     $this->redirect($this->getResource()::getUrl('edit', ['record' => $reservation]));
                 });
             
-            // Action "Refuser" - visible si statut = En Attente ou Accepté
             $actions[] = \Filament\Actions\Action::make('reject')
                 ->label(__('filament.resources.reservations.reject'))
                 ->icon('heroicon-o-x-circle')
@@ -74,7 +70,6 @@ class EditReservation extends EditRecord
                     $this->redirect($this->getResource()::getUrl('edit', ['record' => $reservation]));
                 });
             
-            // Action "Remettre en Attente" - visible si statut = Accepté ou Refusé
             $actions[] = \Filament\Actions\Action::make('reset_to_pending')
                 ->label(__('filament.resources.reservations.reset_to_pending'))
                 ->icon('heroicon-o-arrow-path')
