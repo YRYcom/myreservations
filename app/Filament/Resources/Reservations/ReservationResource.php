@@ -60,19 +60,39 @@ class ReservationResource extends Resource
     public static function canEdit($record): bool
     {
         $user = Auth::user();
-        if ($user?->hasRole('admin')) {
+        
+        if (!$user) {
+            return false;
+        }
+        
+        if ($user->hasRole('admin')) {
             return true;
         }
-        return $user && $record->user_id === $user->id;
+        
+        if ($record->user_id === $user->id) {
+            return true;
+        }
+        
+        return $record->canBeApprovedBy($user);
     }
     
     public static function canDelete($record): bool
     {
         $user = Auth::user();
-        if ($user?->hasRole('admin')) {
+        
+        if (!$user) {
+            return false;
+        }
+        
+        if ($user->hasRole('admin')) {
             return true;
         }
-        return $user && $record->user_id === $user->id;
+        
+        if ($record->user_id === $user->id) {
+            return true;
+        }
+        
+        return $record->canBeApprovedBy($user);
     }
 
     public static function getNavigationLabel(): string
