@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('/home');
+    return redirect('/home');
 });
 
 Route::middleware('auth')->post('/reservations/display-finished', function (Request $request) {
