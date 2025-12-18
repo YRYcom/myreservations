@@ -121,4 +121,12 @@ Other reservations already fill the property\'s capacity on the following dates:
     'emails.reservation_rejected.greeting' => 'Hello :name,',
     'emails.reservation_rejected.message' => 'We are sorry to inform you that your reservation has been rejected by the manager.',
     'emails.reservation_rejected.alternative' => 'Feel free to make a new request for other dates or contact the manager for more information.',
+    
+    'emails.reservation_pending_self_manager.subject' => 'Your reservation is pending your approval',
+    'emails.reservation_pending_self_manager.title' => 'Reservation Pending - Action Required',
+    'emails.reservation_pending_self_manager.greeting' => 'Hello :name,',
+    'emails.reservation_pending_self_manager.info' => 'You are a manager of this property',
+    'emails.reservation_pending_self_manager.message' => 'Your reservation has been successfully registered and is pending approval. As a manager of this property, you can approve or reject it directly.',
+    'emails.reservation_pending_self_manager.action_required' => 'Action required',
+    'emails.reservation_pending_self_manager.next_steps' => 'Log in to the application to approve or reject this reservation.',
 ];

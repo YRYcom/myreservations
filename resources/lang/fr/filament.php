@@ -121,4 +121,12 @@ D\'autres réservations remplissent déjà la capacité d\'accueil du logement a
     'emails.reservation_rejected.message' => 'Nous sommes désolés de vous informer que votre réservation a été refusée par le gestionnaire.',
     'emails.reservation_rejected.alternative' => 'N\'hésitez pas à faire une nouvelle demande pour d\'autres dates ou à contacter le gestionnaire pour plus d\'informations.',
     
+    'emails.reservation_pending_self_manager.subject' => 'Votre réservation est en attente de votre validation',
+    'emails.reservation_pending_self_manager.title' => 'Réservation en Attente - Action Requise',
+    'emails.reservation_pending_self_manager.greeting' => 'Bonjour :name,',
+    'emails.reservation_pending_self_manager.info' => 'Vous êtes gestionnaire de ce bien',
+    'emails.reservation_pending_self_manager.message' => 'Votre réservation a bien été enregistrée et est en attente de validation. En tant que gestionnaire de ce bien, vous pouvez l\'accepter ou la refuser directement.',
+    'emails.reservation_pending_self_manager.action_required' => 'Action requise',
+    'emails.reservation_pending_self_manager.next_steps' => 'Connectez-vous à l\'application pour accepter ou refuser cette réservation.',
+    
 ];

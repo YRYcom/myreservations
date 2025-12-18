@@ -95,16 +95,23 @@ class EditReservation extends EditRecord
                 ->action(function (array $data) use ($reservation, $user) {
                     $reservation->resetToPending($data['comment'] ?? null, $user->id);
                     
-                    \Illuminate\Support\Facades\Mail::to($reservation->user->email)
-                        ->send(new \App\Mail\ReservationPendingUserNotification($reservation));
-                    
                     $managers = $reservation->bien->users()
                         ->wherePivot('profile', 'gestionnaire')
                         ->get();
                     
-                    foreach ($managers as $manager) {
-                        \Illuminate\Support\Facades\Mail::to($manager->email)
-                            ->send(new \App\Mail\ReservationPendingManagerNotification($reservation));
+                    $userIsManager = $managers->contains('id', $reservation->user_id);
+                    
+                    if ($userIsManager) {
+                        \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                            ->send(new \App\Mail\ReservationPendingSelfManagerNotification($reservation));
+                    } else {
+                        \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                            ->send(new \App\Mail\ReservationPendingUserNotification($reservation));
+                        
+                        foreach ($managers as $manager) {
+                            \Illuminate\Support\Facades\Mail::to($manager->email)
+                                ->send(new \App\Mail\ReservationPendingManagerNotification($reservation));
+                        }
                     }
                     
                     \Filament\Notifications\Notification::make()
