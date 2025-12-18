@@ -22,6 +22,11 @@ class EditUser extends EditRecord
         return __('filament.resources.users.edit');
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $user = $this->getRecord();

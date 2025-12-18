@@ -102,6 +102,11 @@ class EditReservation extends EditRecord
         return __('filament.resources.reservations.edit');
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $record = $this->getRecord();

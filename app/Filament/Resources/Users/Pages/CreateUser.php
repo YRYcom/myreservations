@@ -29,6 +29,11 @@ class CreateUser extends CreateRecord
         return $actions;
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function afterCreate(): void
     {
         $data = $this->form->getState();

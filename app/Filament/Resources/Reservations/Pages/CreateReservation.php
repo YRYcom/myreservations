@@ -65,4 +65,9 @@ class CreateReservation extends CreateRecord
 
         return $actions;
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
