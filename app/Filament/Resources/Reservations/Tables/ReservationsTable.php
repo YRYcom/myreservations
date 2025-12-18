@@ -31,9 +31,9 @@ class ReservationsTable
                     $query->whereIn('bien_id', $bienIds);
                 }
                 
-                $query->where('status', '!=', \App\Enums\ReservationStatus::Refuse->value);
-                
                 if (! session('display_finished', false)) {
+                    $query->where('status', '!=', \App\Enums\ReservationStatus::Refuse->value);
+                    
                     $today = now()->startOfDay();
                     $query->where(function (Builder $query) use ($today) {
                         $query->whereNull('date_end')
