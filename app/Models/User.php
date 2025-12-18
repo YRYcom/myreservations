@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole('admin', 'user');
+        return $this->hasAnyRole(['admin', 'user']);
     }
 
     public function biens()
