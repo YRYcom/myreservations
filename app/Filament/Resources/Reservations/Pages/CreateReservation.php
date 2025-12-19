@@ -30,7 +30,21 @@ class CreateReservation extends CreateRecord
             $data['user_id'] = auth()->id();
         }
         
-        $data['status'] = \App\Enums\ReservationStatus::EnAttente->value;
+        $userIsManager = false;
+        if (isset($data['bien_id'])) {
+            $bien = \App\Models\Bien::find($data['bien_id']);
+            if ($bien) {
+                $managers = $bien->users()
+                    ->wherePivot('profile', 'gestionnaire')
+                    ->pluck('users.id')
+                    ->toArray();
+                $userIsManager = in_array($data['user_id'], $managers);
+            }
+        }
+        
+        $data['status'] = $userIsManager 
+            ? \App\Enums\ReservationStatus::Accepte->value
+            : \App\Enums\ReservationStatus::EnAttente->value;
         
         return $data;
     }
@@ -39,12 +53,6 @@ class CreateReservation extends CreateRecord
     {
         $reservation = $this->getRecord();
         
-        $reservation->logStatusChange(
-            \App\Enums\ReservationStatus::EnAttente,
-            'Création de la réservation',
-            null
-        );
-        
         $managers = $reservation->bien->users()
             ->wherePivot('profile', 'gestionnaire')
             ->get();
@@ -52,9 +60,21 @@ class CreateReservation extends CreateRecord
         $userIsManager = $managers->contains('id', $reservation->user_id);
         
         if ($userIsManager) {
+            $reservation->logStatusChange(
+                \App\Enums\ReservationStatus::Accepte,
+                'Réservation auto-acceptée (gestionnaire)',
+                $reservation->user_id
+            );
+            
             \Illuminate\Support\Facades\Mail::to($reservation->user->email)
-                ->send(new \App\Mail\ReservationPendingSelfManagerNotification($reservation));
+                ->send(new \App\Mail\ReservationApprovedNotification($reservation, null));
         } else {
+            $reservation->logStatusChange(
+                \App\Enums\ReservationStatus::EnAttente,
+                'Création de la réservation',
+                null
+            );
+            
             \Illuminate\Support\Facades\Mail::to($reservation->user->email)
                 ->send(new \App\Mail\ReservationPendingUserNotification($reservation));
             
