@@ -84,4 +84,68 @@ Other reservations already fill the property\'s capacity on the following dates:
     
     'dashboard.pending_reservations' => 'Pending Reservations',
     'dashboard.no_pending_reservations' => 'No pending reservations',
+    
+    'emails.reservation_details' => 'Reservation Details',
+    'emails.footer' => 'This email was sent automatically, please do not reply.',
+    
+    'emails.reservation_pending_user.subject' => 'Your reservation is pending approval',
+    'emails.reservation_pending_user.title' => 'Reservation Pending',
+    'emails.reservation_pending_user.greeting' => 'Hello :name,',
+    'emails.reservation_pending_user.message' => 'Your reservation has been successfully registered and is pending approval by a manager.',
+    'emails.reservation_pending_user.next_steps' => 'You will receive a confirmation email as soon as your reservation is approved by a manager.',
+    
+    'emails.reservation_pending_manager.subject' => 'New reservation pending approval',
+    'emails.reservation_pending_manager.title' => 'New Reservation to Approve',
+    'emails.reservation_pending_manager.greeting' => 'Hello,',
+    'emails.reservation_pending_manager.alert' => 'A new reservation requires your attention.',
+    'emails.reservation_pending_manager.action_required' => 'Please log in to the application to approve or reject this reservation.',
+    
+    'resources.reservations.fields.user_id' => 'User',
+    'resources.reservations.fields.bien_id' => 'Property',
+    'resources.reservations.fields.date_start' => 'Start date',
+    'resources.reservations.fields.date_end' => 'End date',
+    'resources.reservations.fields.number_of_guests' => 'Number of guests',
+    'resources.reservations.fields.comment' => 'Comment',
+    
+    'emails.manager_comment' => 'Manager comment',
+    'emails.rejection_reason' => 'Rejection reason',
+    
+    'emails.reservation_approved.subject' => 'Your reservation has been approved',
+    'emails.reservation_approved.title' => 'Reservation Approved',
+    'emails.reservation_approved.greeting' => 'Hello :name,',
+    'emails.reservation_approved.message' => 'Good news! Your reservation has been approved by the manager.',
+    'emails.reservation_approved.enjoy' => 'Enjoy your stay!',
+    
+    'emails.reservation_rejected.subject' => 'Your reservation has been rejected',
+    'emails.reservation_rejected.title' => 'Reservation Rejected',
+    'emails.reservation_rejected.greeting' => 'Hello :name,',
+    'emails.reservation_rejected.message' => 'We are sorry to inform you that your reservation has been rejected by the manager.',
+    'emails.reservation_rejected.alternative' => 'Feel free to make a new request for other dates or contact the manager for more information.',
+    
+    'emails.reservation_pending_self_manager.subject' => 'Your reservation is pending your approval',
+    'emails.reservation_pending_self_manager.title' => 'Reservation Pending - Action Required',
+    'emails.reservation_pending_self_manager.greeting' => 'Hello :name,',
+    'emails.reservation_pending_self_manager.info' => 'You are a manager of this property',
+    'emails.reservation_pending_self_manager.message' => 'Your reservation has been successfully registered and is pending approval. As a manager of this property, you can approve or reject it directly.',
+    'emails.reservation_pending_self_manager.action_required' => 'Action required',
+    'emails.reservation_pending_self_manager.next_steps' => 'Log in to the application to approve or reject this reservation.',
+
+    'emails.reservation_reminder.button' => 'View my reservation',
+    'emails.reservation_reminder_manager.button' => 'Manage the reservation',
+    'emails.reservation_reminder_my.button' => 'Manage my reservation',
+    
+    'emails.manager_reservation.subject' => 'New reservation on your property',
+    'emails.manager_reservation.title' => 'New Reservation',
+    'emails.manager_reservation.greeting' => 'Hello,',
+    'emails.manager_reservation.message' => 'A manager has created a new reservation on a property you manage.',
+    'emails.manager_reservation.created_by' => 'Created by',
+    'emails.manager_reservation.info' => 'This reservation has been automatically accepted.',
+    
+    'emails.manager_approved_reservation.subject' => 'Reservation approved on your property',
+    'emails.manager_approved_reservation.title' => 'Reservation Approved',
+    'emails.manager_approved_reservation.greeting' => 'Hello,',
+    'emails.manager_approved_reservation.message' => 'A manager has approved a reservation on a property you manage.',
+    
+    'resources.biens.fields.description' => 'Property description',
+    
 ];

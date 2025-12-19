@@ -84,4 +84,67 @@ D\'autres réservations remplissent déjà la capacité d\'accueil du logement a
     'dashboard.pending_reservations' => 'Réservations en attente de validation',
     'dashboard.no_pending_reservations' => 'Aucune réservation en attente',
     
+    'emails.reservation_details' => 'Détails de la réservation',
+    'emails.footer' => 'Cet email a été envoyé automatiquement, merci de ne pas y répondre.',
+    
+    'emails.reservation_pending_user.subject' => 'Votre réservation est en attente de validation',
+    'emails.reservation_pending_user.title' => 'Réservation en attente',
+    'emails.reservation_pending_user.greeting' => 'Bonjour :name,',
+    'emails.reservation_pending_user.message' => 'Votre réservation a bien été enregistrée et est en attente de validation par un gestionnaire.',
+    'emails.reservation_pending_user.next_steps' => 'Vous recevrez un email de confirmation dès que votre réservation sera validée par un gestionnaire.',
+    
+    'emails.reservation_pending_manager.subject' => 'Nouvelle réservation en attente de validation',
+    'emails.reservation_pending_manager.title' => 'Nouvelle réservation à valider',
+    'emails.reservation_pending_manager.greeting' => 'Bonjour,',
+    'emails.reservation_pending_manager.alert' => 'Une nouvelle réservation nécessite votre attention.',
+    'emails.reservation_pending_manager.action_required' => 'Veuillez vous connecter à l\'application pour accepter ou refuser cette réservation.',
+    
+    'resources.reservations.fields.user_id' => 'Utilisateur',
+    'resources.reservations.fields.bien_id' => 'Bien',
+    'resources.reservations.fields.date_start' => 'Date de début',
+    'resources.reservations.fields.date_end' => 'Date de fin',
+    'resources.reservations.fields.number_of_guests' => 'Nombre de personnes',
+    'resources.reservations.fields.comment' => 'Commentaire',
+    
+    'emails.manager_comment' => 'Commentaire du gestionnaire',
+    'emails.rejection_reason' => 'Raison du refus',
+    
+    'emails.reservation_approved.subject' => 'Votre réservation a été acceptée',
+    'emails.reservation_approved.title' => 'Réservation Acceptée',
+    'emails.reservation_approved.greeting' => 'Bonjour :name,',
+    'emails.reservation_approved.message' => 'Bonne nouvelle ! Votre réservation a été acceptée par le gestionnaire.',
+    'emails.reservation_approved.enjoy' => 'Profitez bien de votre séjour !',
+    
+    'emails.reservation_rejected.subject' => 'Votre réservation a été refusée',
+    'emails.reservation_rejected.title' => 'Réservation Refusée',
+    'emails.reservation_rejected.greeting' => 'Bonjour :name,',
+    'emails.reservation_rejected.message' => 'Nous sommes désolés de vous informer que votre réservation a été refusée par le gestionnaire.',
+    'emails.reservation_rejected.alternative' => 'N\'hésitez pas à faire une nouvelle demande pour d\'autres dates ou à contacter le gestionnaire pour plus d\'informations.',
+    
+    'emails.reservation_pending_self_manager.subject' => 'Votre réservation est en attente de votre validation',
+    'emails.reservation_pending_self_manager.title' => 'Réservation en Attente - Action Requise',
+    'emails.reservation_pending_self_manager.greeting' => 'Bonjour :name,',
+    'emails.reservation_pending_self_manager.info' => 'Vous êtes gestionnaire de ce bien',
+    'emails.reservation_pending_self_manager.message' => 'Votre réservation a bien été enregistrée et est en attente de validation. En tant que gestionnaire de ce bien, vous pouvez l\'accepter ou la refuser directement.',
+    'emails.reservation_pending_self_manager.action_required' => 'Action requise',
+    'emails.reservation_pending_self_manager.next_steps' => 'Connectez-vous à l\'application pour accepter ou refuser cette réservation.',
+    
+    'emails.reservation_reminder.button' => 'Voir ma réservation',
+    'emails.reservation_reminder_manager.button' => 'Gérer la réservation',
+    'emails.reservation_reminder_my.button' => 'Gérer ma réservation',
+    
+    'emails.manager_reservation.subject' => 'Nouvelle réservation sur votre bien',
+    'emails.manager_reservation.title' => 'Nouvelle Réservation',
+    'emails.manager_reservation.greeting' => 'Bonjour,',
+    'emails.manager_reservation.message' => 'Un gestionnaire a créé une nouvelle réservation sur un bien que vous gérez.',
+    'emails.manager_reservation.created_by' => 'Créée par',
+    'emails.manager_reservation.info' => 'Cette réservation a été automatiquement acceptée.',
+    
+    'emails.manager_approved_reservation.subject' => 'Réservation validée sur votre bien',
+    'emails.manager_approved_reservation.title' => 'Réservation Validée',
+    'emails.manager_approved_reservation.greeting' => 'Bonjour,',
+    'emails.manager_approved_reservation.message' => 'Un gestionnaire a validé une réservation sur un bien que vous gérez.',
+    
+    'resources.biens.fields.description' => 'Description du bien',
+    
 ];

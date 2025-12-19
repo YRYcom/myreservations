@@ -39,6 +39,23 @@ class EditReservation extends EditRecord
                 ])
                 ->action(function (array $data) use ($reservation, $user) {
                     $reservation->approve($data['comment'] ?? null, $user->id);
+                    
+                    \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                        ->send(new \App\Mail\ReservationApprovedNotification($reservation, $data['comment'] ?? null));
+                    
+                    $managers = $reservation->bien->users()
+                        ->wherePivot('profile', 'gestionnaire')
+                        ->get();
+                    
+                    $otherManagers = $managers->filter(function ($manager) use ($user) {
+                        return $manager->id !== $user->id;
+                    });
+                    
+                    foreach ($otherManagers as $manager) {
+                        \Illuminate\Support\Facades\Mail::to($manager->email)
+                            ->send(new \App\Mail\ManagerApprovedReservationNotification($reservation));
+                    }
+                    
                     \Filament\Notifications\Notification::make()
                         ->success()
                         ->title(__('filament.enums.reservation_status.accepte'))
@@ -63,6 +80,10 @@ class EditReservation extends EditRecord
                 ])
                 ->action(function (array $data) use ($reservation, $user) {
                     $reservation->reject($data['comment'] ?? null, $user->id);
+                    
+                    \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                        ->send(new \App\Mail\ReservationRejectedNotification($reservation, $data['comment'] ?? null));
+                    
                     \Filament\Notifications\Notification::make()
                         ->success()
                         ->title(__('filament.enums.reservation_status.refuse'))
@@ -86,6 +107,35 @@ class EditReservation extends EditRecord
                 ])
                 ->action(function (array $data) use ($reservation, $user) {
                     $reservation->resetToPending($data['comment'] ?? null, $user->id);
+                    
+                    $managers = $reservation->bien->users()
+                        ->wherePivot('profile', 'gestionnaire')
+                        ->get();
+                    
+                    $userIsManager = $managers->contains('id', $reservation->user_id);
+                    $currentUserIsManager = $managers->contains('id', $user->id);
+                    
+                    if ($userIsManager && $reservation->user_id === $user->id) {
+                        $otherManagers = $managers->filter(function ($manager) use ($reservation) {
+                            return $manager->id !== $reservation->user_id;
+                        });
+                        
+                        foreach ($otherManagers as $manager) {
+                            \Illuminate\Support\Facades\Mail::to($manager->email)
+                                ->send(new \App\Mail\ReservationPendingManagerNotification($reservation));
+                        }
+                    }
+
+                    elseif (!$userIsManager && $currentUserIsManager) {
+                        \Illuminate\Support\Facades\Mail::to($reservation->user->email)
+                            ->send(new \App\Mail\ReservationPendingUserNotification($reservation));
+                        
+                        foreach ($managers as $manager) {
+                            \Illuminate\Support\Facades\Mail::to($manager->email)
+                                ->send(new \App\Mail\ReservationPendingManagerNotification($reservation));
+                        }
+                    }
+                    
                     \Filament\Notifications\Notification::make()
                         ->success()
                         ->title(__('filament.enums.reservation_status.en_attente'))
