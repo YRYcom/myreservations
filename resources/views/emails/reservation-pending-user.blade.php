@@ -92,9 +92,17 @@
         </div>
         
         <p>{{ __('filament.emails.reservation_pending_user.next_steps') }}</p>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{{ config('app.url') }}/home/reservations/{{ $reservation->id }}/edit" 
+               style="display: inline-block; padding: 12px 24px; background-color: #f59e0b; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                Voir ma réservation
+            </a>
+        </div>
     </div>
     
     <div class="footer">
+
         <p>{{ __('filament.emails.footer') }}</p>
     </div>
 </body>

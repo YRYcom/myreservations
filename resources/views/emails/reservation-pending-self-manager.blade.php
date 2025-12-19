@@ -113,9 +113,17 @@
             <strong>⚠️ {{ __('filament.emails.reservation_pending_self_manager.action_required') }}</strong>
             <p style="margin: 10px 0 0 0;">{{ __('filament.emails.reservation_pending_self_manager.next_steps') }}</p>
         </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{{ config('app.url') }}/home/reservations/{{ $reservation->id }}/edit" 
+               style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #f59e0b 0%, #3b82f6 100%); color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                Gérer ma réservation
+            </a>
+        </div>
     </div>
     
     <div class="footer">
+
         <p>{{ __('filament.emails.footer') }}</p>
     </div>
 </body>
