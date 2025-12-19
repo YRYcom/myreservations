@@ -110,7 +110,7 @@
         @if($reservation->bien->description)
         <div class="description-box">
             <strong>{{ __('filament.resources.biens.fields.description') }} :</strong>
-            <p style="margin: 10px 0 0 0; white-space: pre-line;">{{ $reservation->bien->description }}</p>
+            <div style="margin: 10px 0 0 0;">{!! $reservation->bien->description !!}</div>
         </div>
         @endif
         
@@ -119,7 +119,7 @@
         <div style="text-align: center; margin: 30px 0;">
             <a href="{{ config('app.url') }}/home/reservations/{{ $reservation->id }}/edit" 
                class="button">
-                Voir ma réservation
+                {{ __('filament.emails.reservation_reminder.button') }}
             </a>
         </div>
     </div>
