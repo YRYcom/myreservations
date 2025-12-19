@@ -23,7 +23,10 @@ class BienForm
                     ->default(1),
                 RichEditor::make('description')
                     ->label(__('filament.resources.biens.description'))
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->extraAttributes([
+                        'style' => 'height: 500px;',
+                    ]),
             ]);
     }
 }
