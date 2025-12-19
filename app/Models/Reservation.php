@@ -15,6 +15,7 @@ class Reservation extends Model
         'date_end',
         'comment',
         'status',
+        'reminder_sent_at',
     ];
 
     protected function casts(): array
@@ -23,6 +24,7 @@ class Reservation extends Model
             'date_start' => 'date',
             'date_end' => 'date',
             'status' => \App\Enums\ReservationStatus::class,
+            'reminder_sent_at' => 'datetime',
         ];
     }
 

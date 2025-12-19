@@ -129,4 +129,12 @@ D\'autres réservations remplissent déjà la capacité d\'accueil du logement a
     'emails.reservation_pending_self_manager.action_required' => 'Action requise',
     'emails.reservation_pending_self_manager.next_steps' => 'Connectez-vous à l\'application pour accepter ou refuser cette réservation.',
     
+    'emails.reservation_reminder.subject' => 'Rappel : Votre réservation commence bientôt',
+    'emails.reservation_reminder.title' => 'Rappel de Réservation',
+    'emails.reservation_reminder.greeting' => 'Bonjour :name,',
+    'emails.reservation_reminder.message' => 'Votre réservation commence dans 12 heures !',
+    'emails.reservation_reminder.starts_soon' => 'Nous vous rappelons que votre réservation débute bientôt. Assurez-vous d\'être prêt pour votre arrivée.',
+    
+    'resources.biens.fields.description' => 'Description du bien',
+    
 ];
