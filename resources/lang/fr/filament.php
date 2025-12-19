@@ -129,4 +129,8 @@ D\'autres réservations remplissent déjà la capacité d\'accueil du logement a
     'emails.reservation_pending_self_manager.action_required' => 'Action requise',
     'emails.reservation_pending_self_manager.next_steps' => 'Connectez-vous à l\'application pour accepter ou refuser cette réservation.',
     
+    'emails.reservation_reminder.button' => 'Voir ma réservation',
+    'emails.reservation_reminder_manager.button' => 'Gérer la réservation',
+    'emails.reservation_reminder_my.button' => 'Gérer ma réservation',
+    
 ];
