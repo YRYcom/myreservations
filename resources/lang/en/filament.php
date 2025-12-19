@@ -133,4 +133,19 @@ Other reservations already fill the property\'s capacity on the following dates:
     'emails.reservation_reminder.button' => 'View my reservation',
     'emails.reservation_reminder_manager.button' => 'Manage the reservation',
     'emails.reservation_reminder_my.button' => 'Manage my reservation',
+    
+    'emails.manager_reservation.subject' => 'New reservation on your property',
+    'emails.manager_reservation.title' => 'New Reservation',
+    'emails.manager_reservation.greeting' => 'Hello,',
+    'emails.manager_reservation.message' => 'A manager has created a new reservation on a property you manage.',
+    'emails.manager_reservation.created_by' => 'Created by',
+    'emails.manager_reservation.info' => 'This reservation has been automatically accepted.',
+    
+    'emails.manager_approved_reservation.subject' => 'Reservation approved on your property',
+    'emails.manager_approved_reservation.title' => 'Reservation Approved',
+    'emails.manager_approved_reservation.greeting' => 'Hello,',
+    'emails.manager_approved_reservation.message' => 'A manager has approved a reservation on a property you manage.',
+    
+    'resources.biens.fields.description' => 'Property description',
+    
 ];

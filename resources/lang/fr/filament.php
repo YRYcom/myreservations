@@ -133,4 +133,18 @@ D\'autres réservations remplissent déjà la capacité d\'accueil du logement a
     'emails.reservation_reminder_manager.button' => 'Gérer la réservation',
     'emails.reservation_reminder_my.button' => 'Gérer ma réservation',
     
+    'emails.manager_reservation.subject' => 'Nouvelle réservation sur votre bien',
+    'emails.manager_reservation.title' => 'Nouvelle Réservation',
+    'emails.manager_reservation.greeting' => 'Bonjour,',
+    'emails.manager_reservation.message' => 'Un gestionnaire a créé une nouvelle réservation sur un bien que vous gérez.',
+    'emails.manager_reservation.created_by' => 'Créée par',
+    'emails.manager_reservation.info' => 'Cette réservation a été automatiquement acceptée.',
+    
+    'emails.manager_approved_reservation.subject' => 'Réservation validée sur votre bien',
+    'emails.manager_approved_reservation.title' => 'Réservation Validée',
+    'emails.manager_approved_reservation.greeting' => 'Bonjour,',
+    'emails.manager_approved_reservation.message' => 'Un gestionnaire a validé une réservation sur un bien que vous gérez.',
+    
+    'resources.biens.fields.description' => 'Description du bien',
+    
 ];
