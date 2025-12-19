@@ -6,6 +6,9 @@ return [
     'logout' => 'Se déconnecter',
 
     'resources.biens.name' => 'Nom',
+    'resources.biens.capacity' => 'Nombre de places',
+    'resources.biens.capacity.helper' => 'Nombre de personnes pouvant être dans ce bien',
+    'resources.biens.capacity.column' => 'Places',
     'resources.biens.created_at' => 'Créé le',
     'resources.biens.updated_at' => 'Mis à jour le',
     'resources.biens.delete' => 'Supprimer',
@@ -27,7 +30,13 @@ return [
     'resources.users.title' => 'Utilisateurs',
     'resources.users.role' => 'Rôle',
     'resources.users.biens' => 'Bien(s) attribué(s)',
+    'resources.users.biens.add' => 'Ajouter un bien',
+    'resources.users.biens.select' => 'Sélectionner un bien',
+    'resources.users.profile' => 'Profil',
     'roles_required' => 'Le rôle est obligatoire.',
+
+    'enums.profile_type.utilisateur' => 'Utilisateur',
+    'enums.profile_type.gestionnaire' => 'Gestionnaire',
 
     'dashboard_title' => 'Biens disponibles à la réservation',
 
@@ -45,8 +54,79 @@ return [
     'resources.reservations.comment' => 'Commentaire',
     'resources.reservations.occupant' => 'Occupant',
     'resources.reservations.occupant.name.unique' => 'Le nom de l\'occupant doit être unique.',
-    'resources.reservations.filters.show_finished' => 'Afficher les réservations terminées',
-    'resources.reservations.filters.hide_finished' => 'Masquer les réservations terminées',
+    'resources.reservations.filters.show_finished' => 'Afficher les réservations terminées et refusées',
+    'resources.reservations.filters.hide_finished' => 'Masquer les réservations terminées et refusées',
     'resources.reservations.filters.error' => 'Erreur',
     'resources.reservations.filters.update_error' => 'Une erreur s\'est produite lors de la mise à jour du filtre.',
+    
+    'resources.reservations.number_of_guests' => 'Nombre de personnes',
+    'resources.reservations.capacity.max' => 'Capacité maximale : :capacity personne(s) (réservées sur cette période : :booked)',
+    'resources.reservations.capacity.select_dates' => 'Capacité maximale : :capacity personne(s) (sélectionnez les dates pour voir les réservations)',
+    'resources.reservations.capacity.select_property' => 'Sélectionnez un bien pour voir la capacité',
+    'resources.reservations.capacity.exceeded' => '⚠️ Attention : certaines dates de votre séjour dépassent la capacité d\'accueil du logement.
+D\'autres réservations remplissent déjà la capacité d\'accueil du logement aux dates suivantes :',
+    'resources.reservations.capacity.excess_singular' => 'personne en trop',
+    'resources.reservations.capacity.excess_plural' => 'personnes en trop',
+    'resources.reservations.status' => 'Statut',
+    'resources.reservations.status_history' => 'Historique des statuts',
+    'resources.reservations.approve' => 'Accepter',
+    'resources.reservations.reject' => 'Refuser',
+    'resources.reservations.reset_to_pending' => 'Remettre en Attente',
+    'resources.reservations.approval_comment' => 'Commentaire',
+    'resources.reservations.approval_comment_placeholder' => 'Raison de l\'acceptation ou du refus (optionnel)',
+    
+    'resources.biens.description' => 'Description',
+    
+    'enums.reservation_status.en_attente' => 'En attente',
+    'enums.reservation_status.accepte' => 'Accepté',
+    'enums.reservation_status.refuse' => 'Refusé',
+    
+    'dashboard.pending_reservations' => 'Réservations en attente de validation',
+    'dashboard.no_pending_reservations' => 'Aucune réservation en attente',
+    
+    'emails.reservation_details' => 'Détails de la réservation',
+    'emails.footer' => 'Cet email a été envoyé automatiquement, merci de ne pas y répondre.',
+    
+    'emails.reservation_pending_user.subject' => 'Votre réservation est en attente de validation',
+    'emails.reservation_pending_user.title' => 'Réservation en attente',
+    'emails.reservation_pending_user.greeting' => 'Bonjour :name,',
+    'emails.reservation_pending_user.message' => 'Votre réservation a bien été enregistrée et est en attente de validation par un gestionnaire.',
+    'emails.reservation_pending_user.next_steps' => 'Vous recevrez un email de confirmation dès que votre réservation sera validée par un gestionnaire.',
+    
+    'emails.reservation_pending_manager.subject' => 'Nouvelle réservation en attente de validation',
+    'emails.reservation_pending_manager.title' => 'Nouvelle réservation à valider',
+    'emails.reservation_pending_manager.greeting' => 'Bonjour,',
+    'emails.reservation_pending_manager.alert' => 'Une nouvelle réservation nécessite votre attention.',
+    'emails.reservation_pending_manager.action_required' => 'Veuillez vous connecter à l\'application pour accepter ou refuser cette réservation.',
+    
+    'resources.reservations.fields.user_id' => 'Utilisateur',
+    'resources.reservations.fields.bien_id' => 'Bien',
+    'resources.reservations.fields.date_start' => 'Date de début',
+    'resources.reservations.fields.date_end' => 'Date de fin',
+    'resources.reservations.fields.number_of_guests' => 'Nombre de personnes',
+    'resources.reservations.fields.comment' => 'Commentaire',
+    
+    'emails.manager_comment' => 'Commentaire du gestionnaire',
+    'emails.rejection_reason' => 'Raison du refus',
+    
+    'emails.reservation_approved.subject' => 'Votre réservation a été acceptée',
+    'emails.reservation_approved.title' => 'Réservation Acceptée',
+    'emails.reservation_approved.greeting' => 'Bonjour :name,',
+    'emails.reservation_approved.message' => 'Bonne nouvelle ! Votre réservation a été acceptée par le gestionnaire.',
+    'emails.reservation_approved.enjoy' => 'Profitez bien de votre séjour !',
+    
+    'emails.reservation_rejected.subject' => 'Votre réservation a été refusée',
+    'emails.reservation_rejected.title' => 'Réservation Refusée',
+    'emails.reservation_rejected.greeting' => 'Bonjour :name,',
+    'emails.reservation_rejected.message' => 'Nous sommes désolés de vous informer que votre réservation a été refusée par le gestionnaire.',
+    'emails.reservation_rejected.alternative' => 'N\'hésitez pas à faire une nouvelle demande pour d\'autres dates ou à contacter le gestionnaire pour plus d\'informations.',
+    
+    'emails.reservation_pending_self_manager.subject' => 'Votre réservation est en attente de votre validation',
+    'emails.reservation_pending_self_manager.title' => 'Réservation en Attente - Action Requise',
+    'emails.reservation_pending_self_manager.greeting' => 'Bonjour :name,',
+    'emails.reservation_pending_self_manager.info' => 'Vous êtes gestionnaire de ce bien',
+    'emails.reservation_pending_self_manager.message' => 'Votre réservation a bien été enregistrée et est en attente de validation. En tant que gestionnaire de ce bien, vous pouvez l\'accepter ou la refuser directement.',
+    'emails.reservation_pending_self_manager.action_required' => 'Action requise',
+    'emails.reservation_pending_self_manager.next_steps' => 'Connectez-vous à l\'application pour accepter ou refuser cette réservation.',
+    
 ];

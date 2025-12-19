@@ -2,7 +2,6 @@ window.displayFinishedToggle = function (initialChecked) {
     return {
         checked: initialChecked,
         toggle() {
-            console.log('Toggle called, checked:', this.checked);
             const formData = new FormData();
             formData.append('_token', document.querySelector('meta[name="csrf-token"]')?.content || '');
             formData.append('display_finished', this.checked ? '1' : '0');
@@ -11,8 +10,6 @@ window.displayFinishedToggle = function (initialChecked) {
             const routeUrl = document.getElementById('display-finished-toggle-container')?.dataset.routeUrl;
             const errorTitle = document.getElementById('display-finished-toggle-container')?.dataset.errorTitle;
             const errorMessage = document.getElementById('display-finished-toggle-container')?.dataset.errorMessage;
-
-            console.log('Sending request to:', routeUrl);
 
             fetch(routeUrl, {
                 method: 'POST',
@@ -23,9 +20,7 @@ window.displayFinishedToggle = function (initialChecked) {
                 credentials: 'same-origin',
             })
                 .then((response) => {
-                    console.log('Response received:', response);
                     if (!response.ok) {
-                        console.error('Response not OK:', response.status);
                         new FilamentNotification()
                             .title(errorTitle)
                             .danger()
@@ -36,20 +31,11 @@ window.displayFinishedToggle = function (initialChecked) {
                     return response.json();
                 })
                 .then((data) => {
-                    console.log('Data received:', data);
-                    if (!data) return;
-
-                    if (data.redirect_to) {
-                        console.log('Redirecting to:', data.redirect_to);
-                        window.location = data.redirect_to;
-                        return;
+                    if (data) {
+                        Livewire.dispatch('refresh');
                     }
-
-                    console.log('Reloading page');
-                    window.location.reload();
                 })
                 .catch((error) => {
-                    console.error('Fetch error:', error);
                     new FilamentNotification()
                         .title(errorTitle)
                         .danger()

@@ -30,7 +30,10 @@ class ReservationsTable
                     $bienIds = $user->getAccessibleBiens()->pluck('id')->toArray();
                     $query->whereIn('bien_id', $bienIds);
                 }
+                
                 if (! session('display_finished', false)) {
+                    $query->where('status', '!=', \App\Enums\ReservationStatus::Refuse->value);
+                    
                     $today = now()->startOfDay();
                     $query->where(function (Builder $query) use ($today) {
                         $query->whereNull('date_end')
@@ -47,6 +50,10 @@ class ReservationsTable
                     ->label(__('filament.resources.reservations.bien.name'))
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('number_of_guests')
+                    ->label(__('filament.resources.reservations.number_of_guests'))
+                    ->alignCenter()
+                    ->sortable(),
                 TextColumn::make('date_start')
                     ->label(__('filament.resources.reservations.date_start'))
                     ->date('d/m/Y')
@@ -54,6 +61,12 @@ class ReservationsTable
                 TextColumn::make('date_end')
                     ->label(__('filament.resources.reservations.date_end'))
                     ->date('d/m/Y')
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->label(__('filament.resources.reservations.status'))
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => $state->label())
+                    ->color(fn ($record) => $record->status->color())
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label(__('filament.resources.reservations.created_at'))
@@ -66,7 +79,6 @@ class ReservationsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([])
             ->recordActions([
                 EditAction::make()
                     ->visible(fn ($record) => \App\Filament\Resources\Reservations\ReservationResource::canEdit($record)),

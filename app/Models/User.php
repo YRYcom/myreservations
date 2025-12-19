@@ -7,8 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Filament\Panel;
+use Filament\Models\Contracts\FilamentUser;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable, HasRoles;
 
@@ -33,12 +34,12 @@ class User extends Authenticatable
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole('admin', 'user');
+        return $this->hasAnyRole(['admin', 'user']);
     }
 
     public function biens()
     {
-        return $this->belongsToMany(Bien::class);
+        return $this->belongsToMany(Bien::class)->withPivot('profile');
     }
 
     public function getAccessibleBiens()
