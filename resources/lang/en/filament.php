@@ -135,6 +135,9 @@ Other reservations already fill the property\'s capacity on the following dates:
     'emails.reservation_reminder.greeting' => 'Hello :name,',
     'emails.reservation_reminder.message' => 'Your reservation starts in 12 hours!',
     'emails.reservation_reminder.starts_soon' => 'We remind you that your reservation begins soon. Make sure you are ready for your arrival.',
+    'emails.reservation_reminder.button' => 'View my reservation',
+    'emails.reservation_reminder_manager.button' => 'Manage the reservation',
+    'emails.reservation_reminder_my.button' => 'Manage my reservation',
     
     'resources.biens.fields.description' => 'Property description',
     

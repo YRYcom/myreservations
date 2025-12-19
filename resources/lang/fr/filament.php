@@ -134,6 +134,9 @@ D\'autres réservations remplissent déjà la capacité d\'accueil du logement a
     'emails.reservation_reminder.greeting' => 'Bonjour :name,',
     'emails.reservation_reminder.message' => 'Votre réservation commence dans 12 heures !',
     'emails.reservation_reminder.starts_soon' => 'Nous vous rappelons que votre réservation débute bientôt. Assurez-vous d\'être prêt pour votre arrivée.',
+    'emails.reservation_reminder.button' => 'Voir ma réservation',
+    'emails.reservation_reminder_manager.button' => 'Gérer la réservation',
+    'emails.reservation_reminder_my.button' => 'Gérer ma réservation',
     
     'resources.biens.fields.description' => 'Description du bien',
     

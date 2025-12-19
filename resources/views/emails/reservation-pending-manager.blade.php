@@ -110,7 +110,7 @@
         <div style="text-align: center; margin: 30px 0;">
             <a href="{{ config('app.url') }}/home/reservations/{{ $reservation->id }}/edit" 
                style="display: inline-block; padding: 12px 24px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
-                Gérer la réservation
+                {{ __('filament.emails.reservation_reminder_manager.button') }}
             </a>
         </div>
     </div>
