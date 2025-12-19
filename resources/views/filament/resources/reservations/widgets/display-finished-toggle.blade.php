@@ -15,7 +15,7 @@
         x-model="checked"
         @change="toggle()"
     >
-    <label for="display-finished-toggle" class="text-sm font-medium text-gray-700 dark:text-white whitespace-nowrap">
+    <label for="display-finished-toggle" class="text-sm font-medium whitespace-nowrap">
         {{ __('filament.resources.reservations.filters.show_finished') }}
     </label>
 </div>
