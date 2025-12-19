@@ -66,8 +66,14 @@ class CreateReservation extends CreateRecord
                 $reservation->user_id
             );
             
-            \Illuminate\Support\Facades\Mail::to($reservation->user->email)
-                ->send(new \App\Mail\ReservationApprovedNotification($reservation, null));
+            $otherManagers = $managers->filter(function ($manager) use ($reservation) {
+                return $manager->id !== $reservation->user_id;
+            });
+            
+            foreach ($otherManagers as $manager) {
+                \Illuminate\Support\Facades\Mail::to($manager->email)
+                    ->send(new \App\Mail\ManagerReservationNotification($reservation));
+            }
         } else {
             $reservation->logStatusChange(
                 \App\Enums\ReservationStatus::EnAttente,
