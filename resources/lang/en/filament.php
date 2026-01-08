@@ -129,7 +129,12 @@ Other reservations already fill the property\'s capacity on the following dates:
     'emails.reservation_pending_self_manager.message' => 'Your reservation has been successfully registered and is pending approval. As a manager of this property, you can approve or reject it directly.',
     'emails.reservation_pending_self_manager.action_required' => 'Action required',
     'emails.reservation_pending_self_manager.next_steps' => 'Log in to the application to approve or reject this reservation.',
-
+    
+    'emails.reservation_reminder.subject' => 'Reminder: Your reservation starts soon',
+    'emails.reservation_reminder.title' => 'Reservation Reminder',
+    'emails.reservation_reminder.greeting' => 'Hello :name,',
+    'emails.reservation_reminder.message' => 'Your reservation starts tomorrow!',
+    'emails.reservation_reminder.starts_soon' => 'We remind you that your reservation begins tomorrow. Make sure you are ready for your arrival.',
     'emails.reservation_reminder.button' => 'View my reservation',
     'emails.reservation_reminder_manager.button' => 'Manage the reservation',
     'emails.reservation_reminder_my.button' => 'Manage my reservation',
