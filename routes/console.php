@@ -10,4 +10,3 @@ Artisan::command('inspire', function () {
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::command('reservations:send-reminders')->dailyAt('09:00');
-
