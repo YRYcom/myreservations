@@ -25,12 +25,10 @@ class SendReservationReminders extends Command
      */
     public function handle()
     {
-        // Calculate the time window: 12 hours from now ± 30 minutes
-        $targetTime = now()->addHours(15);
+        $targetTime = now()->addHours(12);
         $startWindow = $targetTime->copy()->subMinutes(30);
         $endWindow = $targetTime->copy()->addMinutes(30);
 
-        // Find accepted reservations starting in ~12 hours that haven't received a reminder
         $reservations = \App\Models\Reservation::query()
             ->where('status', \App\Enums\ReservationStatus::Accepte)
             ->whereNull('reminder_sent_at')
@@ -43,11 +41,9 @@ class SendReservationReminders extends Command
 
         foreach ($reservations as $reservation) {
             try {
-                // Send the reminder email
                 \Illuminate\Support\Facades\Mail::to($reservation->user->email)
                     ->send(new \App\Mail\ReservationReminderNotification($reservation));
 
-                // Mark as sent
                 $reservation->update(['reminder_sent_at' => now()]);
 
                 $count++;
