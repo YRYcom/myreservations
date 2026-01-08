@@ -28,7 +28,7 @@ class SendReservationReminders extends Command
         $tomorrow = now()->addDay()->startOfDay();
         $dayAfterTomorrow = $tomorrow->copy()->addDay();
 
-        $reservations = \App\Models\Reservation::query()
+        $reservationsStartingTomorrow = \App\Models\Reservation::query()
             ->where('status', \App\Enums\ReservationStatus::Accepte)
             ->whereNull('reminder_sent_at')
             ->whereBetween('date_start', [$tomorrow, $dayAfterTomorrow])
@@ -37,7 +37,7 @@ class SendReservationReminders extends Command
 
         $count = 0;
 
-        foreach ($reservations as $reservation) {
+        foreach ($reservationsStartingTomorrow as $reservation) {
             try {
                 \Illuminate\Support\Facades\Mail::to($reservation->user->email)
                     ->send(new \App\Mail\ReservationReminderNotification($reservation));
