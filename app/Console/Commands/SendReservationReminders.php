@@ -18,22 +18,20 @@ class SendReservationReminders extends Command
      *
      * @var string
      */
-    protected $description = 'Send reminder emails for reservations starting in 12 hours';
+    protected $description = 'Send reminder emails for reservations starting tomorrow';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $targetTime = now()->addHours(12);
-        $startWindow = $targetTime->copy()->subMinutes(30);
-        $endWindow = $targetTime->copy()->addMinutes(30);
+        $tomorrow = now()->addDay()->startOfDay();
+        $dayAfterTomorrow = $tomorrow->copy()->addDay();
 
         $reservations = \App\Models\Reservation::query()
             ->where('status', \App\Enums\ReservationStatus::Accepte)
             ->whereNull('reminder_sent_at')
-            ->whereDate('date_start', $targetTime->toDateString())
-            ->whereBetween('date_start', [$startWindow, $endWindow])
+            ->whereBetween('date_start', [$tomorrow, $dayAfterTomorrow])
             ->with(['user', 'bien'])
             ->get();
 
