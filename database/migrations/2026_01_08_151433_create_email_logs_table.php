@@ -14,9 +14,16 @@ return new class extends Migration
         Schema::create('email_logs', function (Blueprint $table) {
             $table->id();
             $table->string('destinataire');
+            $table->string('cc')->nullable();
+            $table->string('bcc')->nullable();
             $table->string('sujet');
+            $table->text('body_preview')->nullable();
             $table->timestamp('sent_at');
             $table->timestamps();
+            
+            // Indexes for better query performance
+            $table->index('destinataire');
+            $table->index('sent_at');
         });
     }
 
