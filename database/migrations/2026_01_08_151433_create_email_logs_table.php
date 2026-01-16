@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('activity_log', function (Blueprint $table) {
             $table->id();
-            $table->string('action'); // Enum value (ActivityAction)
+            $table->string('action'); 
             $table->string('class_name')->nullable();
             $table->unsignedBigInteger('reference_id')->nullable();
             $table->json('value')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
             
-            // Indexes for better query performance
             $table->index('action');
             $table->index('user_id');
             $table->index(['class_name', 'reference_id']);
