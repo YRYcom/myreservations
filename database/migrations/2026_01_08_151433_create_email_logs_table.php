@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('email_logs', function (Blueprint $table) {
+        Schema::create('activity_log', function (Blueprint $table) {
             $table->id();
-            $table->string('destinataire');
-            $table->string('cc')->nullable();
-            $table->string('bcc')->nullable();
-            $table->string('sujet');
-            $table->text('body_preview')->nullable();
-            $table->timestamp('sent_at');
+            $table->string('action'); 
+            $table->string('class_name')->nullable();
+            $table->unsignedBigInteger('reference_id')->nullable();
+            $table->json('value')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
             
-            // Indexes for better query performance
-            $table->index('destinataire');
-            $table->index('sent_at');
+            $table->index('action');
+            $table->index('user_id');
+            $table->index(['class_name', 'reference_id']);
+            $table->index('created_at');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('email_logs');
+        Schema::dropIfExists('activity_log');
     }
 };
