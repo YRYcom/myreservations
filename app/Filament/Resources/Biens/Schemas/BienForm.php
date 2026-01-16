@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Biens\Schemas;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Schema;
 
 class BienForm
@@ -21,6 +22,14 @@ class BienForm
                     ->numeric()
                     ->minValue(1)
                     ->default(1),
+                FileUpload::make('photo')
+                    ->label(__('filament.resources.biens.photo'))
+                    ->image()
+                    ->disk('public')
+                    ->directory('biens')
+                    ->maxSize(5120)
+                    ->imageEditor()
+                    ->columnSpanFull(),
                 RichEditor::make('description')
                     ->label(__('filament.resources.biens.description'))
                     ->columnSpanFull()

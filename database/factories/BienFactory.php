@@ -23,6 +23,7 @@ class BienFactory extends Factory
             'name' => fake()->words(3, true),
             'capacity' => fake()->numberBetween(2, 12),
             'description' => fake()->paragraph(),
+            'photo' => null,
         ];
     }
 

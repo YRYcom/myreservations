@@ -16,6 +16,8 @@ return [
     'resources.biens.create' => 'Create a property',
     'resources.biens.index' => 'List of properties',
     'resources.biens.show' => 'View property',
+    'resources.biens.photo' => 'Picture',
+
 
     'resources.users.name' => 'Name',
     'resources.users.email' => 'Email',

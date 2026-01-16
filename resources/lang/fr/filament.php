@@ -16,6 +16,8 @@ return [
     'resources.biens.create' => 'Créer un bien',
     'resources.biens.index' => 'Liste des biens',
     'resources.biens.show' => 'Voir le bien',
+    'resources.biens.photo' => 'Photo',
+
 
     'resources.users.name' => 'Nom',
     'resources.users.email' => 'Email',

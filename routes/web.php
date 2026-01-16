@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BienPhotoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -13,3 +14,7 @@ Route::middleware('auth')->post('/reservations/display-finished', function (Requ
         'success' => true,
     ]);
 })->name('reservations.display-finished');
+
+// Route sécurisée pour les photos des biens
+Route::middleware('auth')->get('/biens/{bien}/photo', [BienPhotoController::class, 'show'])
+    ->name('bien.photo');
