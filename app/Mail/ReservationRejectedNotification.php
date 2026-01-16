@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Mail\Concerns\HasActivityLogging;
 use App\Models\Reservation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -9,10 +10,11 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Symfony\Component\Mime\Email;
 
 class ReservationRejectedNotification extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, HasActivityLogging;
 
     /**
      * Create a new message instance.
@@ -21,7 +23,9 @@ class ReservationRejectedNotification extends Mailable
         public Reservation $reservation,
         public ?string $comment = null
     ) {
-        //
+        $this->withSymfonyMessage(function (Email $message) {
+            $this->addActivityMetadata($message);
+        });
     }
 
     /**
